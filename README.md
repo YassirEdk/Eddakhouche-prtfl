@@ -1,73 +1,101 @@
-# Welcome to your Lovable project
+# Portfolio de Yassir Eddakhouche 🚀
 
-## Project info
+[![React](https://img.shields.io/badge/React-18-blue?logo=react&logoColor=white)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-4.4-purple?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.3.3-blue?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?logo=github&logoColor=white)](https://github.com/YassirEdk)
 
-**URL**: https://lovable.dev/projects/fa51102d-5d77-40cc-8ef7-22ec5e6831b7
+---
 
-## How can I edit this code?
+## 🌟 À propos
 
-There are several ways of editing your application.
+Bienvenue sur mon portfolio personnel !  
+Ce site présente mes compétences, mes projets réalisés et permet de me contacter facilement.  
+Il est développé avec **React 18**, **Vite**, **TypeScript** et **Tailwind CSS**, pour un rendu moderne, rapide et responsive.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/fa51102d-5d77-40cc-8ef7-22ec5e6831b7) and start prompting.
+## 🎬 Démo 
 
-Changes made via Lovable will be committed automatically to this repo.
+![Portfolio Demo](public/demo.png)  
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 💻 Fonctionnalités
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Présentation personnelle et compétences  
+- Galerie de projets avec liens vers GitHub ou démonstration live  
+- Formulaire de contact ou liens vers réseaux professionnels  
+- Design responsive pour mobile et desktop  
+- Navigation fluide avec animations modernes  
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🛠️ Technologies utilisées
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- **React 18** – Bibliothèque UI moderne  
+- **Vite** – Build tool rapide et performant  
+- **TypeScript** – Typage statique pour un code sûr  
+- **Tailwind CSS** – Framework CSS moderne et responsive  
+- **Git & GitHub** – Versioning et hébergement du code  
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## 🚀 Installation
+
+1. Cloner le dépôt :
+
+git clone https://github.com/YassirEdk/Portfolio.git
+
+cd Portfolio
+
+2. Installer les dépendances :
+
+npm install
+
+ou
+
+yarn install
+
+3. Lancer le serveur de développement :
+
 npm run dev
-```
 
-**Edit a file directly in GitHub**
+ou
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+yarn dev
 
-**Use GitHub Codespaces**
+Ouvrir le projet dans le navigateur à l’adresse affichée (par défaut http://localhost:5173).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+📂 Structure du projet
 
-## What technologies are used for this project?
+Portfolio/
 
-This project is built with:
+├─ public/          # Images, GIFs, icônes
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+├─ src/             # Code source
 
-## How can I deploy this project?
+│  ├─ assets/       # Images et icônes
 
-Simply open [Lovable](https://lovable.dev/projects/fa51102d-5d77-40cc-8ef7-22ec5e6831b7) and click on Share -> Publish.
+│  ├─ components/   # Composants React réutilisables
 
-## Can I connect a custom domain to my Lovable project?
+│  ├─ pages/        # Pages principales
 
-Yes, you can!
+│  └─ App.tsx       # Composant principal
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+├─ vite.config.ts    # Configuration Vite
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+├─ package.json      # Dépendances et scripts
+
+└─ tailwind.config.ts# Configuration Tailwind CSS
+
+🤝 Contact
+
+GitHub : https://github.com/YassirEdk
+
+Email : yassireddakhouche@gmail.com
+
+LinkedIn : https://www.linkedin.com/in/yassir-eddakhouche-b11650239/
+
+Merci d’avoir visité mon portfolio ! 🚀
