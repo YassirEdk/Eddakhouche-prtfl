@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const certifications = [
   {
-    title: "Building Scalable Java Microservices",
+    title: "Building Scalable Java Microservices with Spring Boot and Spring Cloud",
     issuer: "Google Cloud Training",
     link: "https://coursera.org/share/1bcf6e81d760f670609b6637312ccd35"
   },
