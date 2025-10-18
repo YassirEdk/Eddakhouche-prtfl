@@ -18,7 +18,7 @@ Il est développé avec **React 18**, **Vite**, **TypeScript** et **Tailwind CSS
 
 ## 🎬 Démo 
 
-![Portfolio Demo](public/dem.png)  
+![Portfolio Demo](public/demo.png)  
 
 ---
 
