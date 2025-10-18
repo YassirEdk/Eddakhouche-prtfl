@@ -19,9 +19,9 @@ const certifications = [
     link: "https://coursera.org/share/87aa69cf732807a114f97a6bc71f45c9"
   },
   {
-    title: "Building Scalable Java Microservices with Spring Boot and Spring Cloud",
-    issuer: "Google Cloud",
-    link: "https://coursera.org/share/1bcf6e81d760f670609b6637312ccd35"
+    title: "Python for Everybody",
+    issuer: "University of Michigan",
+    link: "https://coursera.org/share/f475f11918cde2681d2b3b81290d6f9a"
   }
 ];
 
