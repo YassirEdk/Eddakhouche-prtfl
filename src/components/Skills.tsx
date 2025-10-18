@@ -29,14 +29,14 @@ export const Skills = () => {
         </h2>
         <div className="grid md:grid-cols-2 gap-6">
           {skillCategories.map((category, index) => (
-            <Card key={index}>
+            <Card key={index} className="transition-all duration-300 hover:border-primary hover:shadow-[0_0_20px_rgba(59,130,246,1)] cursor-pointer">
               <CardHeader>
                 <CardTitle className="text-lg text-primary">{category.title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <Badge key={skillIndex} variant="outline" className="text-sm">
+                    <Badge key={skillIndex} variant="secondary" className="text-sm transition-all duration-300 hover:text-primary hover:[text-shadow:0_0_15px_rgba(59,130,246,1)] cursor-pointer border-0">
                       {skill}
                     </Badge>
                   ))}
