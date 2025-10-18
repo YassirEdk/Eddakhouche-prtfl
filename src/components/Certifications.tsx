@@ -19,9 +19,9 @@ const certifications = [
     link: "https://coursera.org/share/87aa69cf732807a114f97a6bc71f45c9"
   },
   {
-    title: "Google Cloud Skills",
+    title: "Building Scalable Java Microservices with Spring Boot and Spring Cloud",
     issuer: "Google Cloud",
-    link: "https://www.cloudskillsboost.google/public_profiles/8c1aa17f-c11f-43fb-a087-5a5e58b4ac88"
+    link: "https://coursera.org/share/1bcf6e81d760f670609b6637312ccd35"
   }
 ];
 
