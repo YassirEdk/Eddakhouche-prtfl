@@ -27,7 +27,7 @@ export const Hero = () => {
                 </span>
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-primary font-semibold mb-4 break-words">
-                Ingénieur d'État en Informatique & Réseau
+                Ingénieur D'ETAT en Informatique & Réseau
               </p>
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed break-words max-w-2xl mx-auto lg:mx-0">
                 Spécialisé en développement full-stack et architecture réseau avec une expertise en Spring Boot, React, et solutions NAC
