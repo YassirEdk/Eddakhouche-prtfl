@@ -18,7 +18,7 @@ Il est développé avec **React 18**, **Vite**, **TypeScript** et **Tailwind CSS
 
 ## 🎬 Démo 
 
-![Portfolio Demo](public/demo.png)  
+![Portfolio Demo](public/demo1.png)  
 
 ---
 
@@ -46,7 +46,7 @@ Il est développé avec **React 18**, **Vite**, **TypeScript** et **Tailwind CSS
 
 1. Cloner le dépôt :
 
-git clone https://github.com/YassirEdk/Portfolio.git
+git clone https://github.com/YassirEdk/Eddakhouche-prtfl
 
 cd Portfolio
 
@@ -66,7 +66,7 @@ ou
 
 yarn dev
 
-Ouvrir le projet dans le navigateur à l’adresse affichée (par défaut http://localhost:5173).
+Ouvrir le projet dans le navigateur à l’adresse affichée (par défaut http://localhost:8080).
 
 📂 Structure du projet
 
@@ -96,6 +96,6 @@ GitHub : https://github.com/YassirEdk
 
 Email : yassireddakhouche@gmail.com
 
-LinkedIn : https://www.linkedin.com/in/yassir-eddakhouche-b11650239/
+LinkedIn : https://www.linkedin.com/in/yassir-eddakhouche/
 
 Merci d’avoir visité mon portfolio ! 🚀
