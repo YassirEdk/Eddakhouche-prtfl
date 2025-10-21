@@ -13,9 +13,24 @@ const projects = [
     technologies: ["Spring Boot", "React", "PostgreSQL"]
   },
   {
+    title: "Application de facturation",
+    description: "Application web de gestion des factures et des paiements conçue avec Spring Boot et React, offrant un suivi automatisé des transactions, une génération dynamique de factures, et des tableaux de bord interactifs pour l’analyse financière.",
+    technologies: ["Spring Boot", "React", "PostgreSQL"]
+  },
+  {
     title: "Little Lemon Food Order App",
     description: "Application web mobile pour la commande de nourriture avec interface utilisateur moderne et intuitive.",
     technologies: ["React Native", "PostgreSQL"]
+  },
+  {
+    title: "E-Commerce Management System",
+    description: "Application web de vente en ligne basée sur Odoo, offrant une interface fluide pour la gestion des produits, des commandes et des paiements, tout en assurant un suivi automatisé des stocks.",
+    technologies: ["Odoo", "PostgreSQL"]
+  },
+  {
+    title: "Rental Agency Management System",
+    description: "Application web de gestion de location de véhicules, permettant la réservation, le suivi des contrats et la facturation automatisée via une interface claire et moderne.",
+    technologies: ["Odoo", "GraphHopperAPI","PostgreSQL"]
   }
 ];
 

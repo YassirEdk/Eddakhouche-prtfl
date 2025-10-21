@@ -8,7 +8,7 @@ const skillCategories = [
   },
   {
     title: "Frameworks",
-    skills: ["Spring Boot", "React", "Angular", "Django"]
+    skills: ["Spring Boot", "React", "Angular", "Django","Odoo (ERP & Framework)"]
   },
   {
     title: "Bases de Données",
