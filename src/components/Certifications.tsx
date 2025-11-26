@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 
 const certifications = [
   {
-    title: "Building Scalable Java Microservices with Spring Boot and Spring Cloud",
-    issuer: "Google Cloud Training",
-    link: "https://coursera.org/share/1bcf6e81d760f670609b6637312ccd35"
+    title: "Python for Everybody",
+    issuer: "University of Michigan",
+    link: "https://coursera.org/share/f475f11918cde2681d2b3b81290d6f9a"
   },
   {
     title: "Meta React Native",
@@ -19,9 +19,9 @@ const certifications = [
     link: "https://coursera.org/share/87aa69cf732807a114f97a6bc71f45c9"
   },
   {
-    title: "Python for Everybody",
-    issuer: "University of Michigan",
-    link: "https://coursera.org/share/f475f11918cde2681d2b3b81290d6f9a"
+    title: "Honoris 21st Century Soft Skills Certificate",
+    issuer: "Honoris Online Academy",
+    link: "https://certificate.bcdiploma.com/check/A655474D765B7BC3C81EB3F428E439F629E975D8A71FBD154C2A90E74243C2A3WS9ZQVppeXUvV2FvdVgzR3FocGY0dDMrRGptdm9uK3h0MUhtWUhYT2lxTmVSYXlU"
   }
 ];
 
