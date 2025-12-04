@@ -40,7 +40,7 @@ const experiences = [
     technologies: ["Odoo17", "React", "PostgreSql", "Jira", "GraphHopperAPI"]
   },
   {
-    company: "Marsa Maroc",
+    company: "Afriquia Gaz Maroc",
     role: "Stagiaire",
     type: "Stage",
     period: "Août 2023",
