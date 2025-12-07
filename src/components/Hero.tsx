@@ -62,7 +62,7 @@ export const Hero = () => {
               </Button>
               <Button variant="default" size="sm" asChild className="gap-2">
                 <a
-                  href="https://drive.usercontent.google.com/u/0/uc?id=1MsKwA5HrXn7WPjifYiQkJ1usR8bkQ4Hi&export=download"
+                  href="https://drive.usercontent.google.com/u/0/uc?id=11fCNO9_awwCCOfBQTacMqorIhIp2oeCm&export=download"
                   download
                   className="flex items-center gap-1.5 sm:gap-2 bg-accent text-accent-foreground px-3 py-2 rounded-lg hover:bg-accent/90 transition-all shadow-[var(--shadow-medium)] text-xs xs:text-sm sm:text-base w-full sm:w-auto justify-center"
                 >
