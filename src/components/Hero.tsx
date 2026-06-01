@@ -57,7 +57,7 @@ export const Hero = () => {
             {/* Description */}
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-md">
               Spécialisé en développement full-stack, ERP Odoo et architecture réseau.
-              Actuellement développeur Odoo chez <span className="text-foreground font-medium">MedAfrica Logistics & Outletna</span>.
+              Actuellement développeur Odoo chez <span className="text-foreground font-medium">MedAfrica Logistics</span>.
             </p>
 
             {/* Buttons + Cards in shared container so they share the same width */}

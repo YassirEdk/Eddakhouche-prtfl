@@ -26,7 +26,7 @@ const CompanyLogo = ({ logo, initials, color, company }: { logo: string; initial
 
 const experiences = [
   {
-    company: "MedAfrica Logistics & Outletna",
+    company: "MedAfrica Logistics",
     role: "Développeur Odoo",
     type: "Emploi",
     period: "Janvier 2026 - Aujourd'hui",
