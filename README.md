@@ -1,101 +1,127 @@
-# Portfolio de Yassir Eddakhouche 🚀
+<div align="center">
 
-[![React](https://img.shields.io/badge/React-18-blue?logo=react&logoColor=white)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-4.4-purple?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.3.3-blue?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?logo=github&logoColor=white)](https://github.com/YassirEdk)
+# EDDAKHOUCHE Yassir — Portfolio
 
----
+**Ingénieur d'État en Informatique & Réseau**
 
-## 🌟 À propos
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38BDF8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-Bienvenue sur mon portfolio personnel !  
-Ce site présente mes compétences, mes projets réalisés et permet de me contacter facilement.  
-Il est développé avec **React 18**, **Vite**, **TypeScript** et **Tailwind CSS**, pour un rendu moderne, rapide et responsive.
-
----
-
-## 🎬 Démo 
-
-![Portfolio Demo](public/demo1.png)  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Yassir_Eddakhouche-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yassir-eddakhouche/)
+[![GitHub](https://img.shields.io/badge/GitHub-YassirEdk-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/YassirEdk)
+[![Email](https://img.shields.io/badge/Email-yassireddakhouche@gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:yassireddakhouche@gmail.com)
 
 ---
 
-## 💻 Fonctionnalités
+![Portfolio Preview](public/preview.png)
 
-- Présentation personnelle et compétences  
-- Galerie de projets avec liens vers GitHub ou démonstration live  
-- Formulaire de contact ou liens vers réseaux professionnels  
-- Design responsive pour mobile et desktop  
-- Navigation fluide avec animations modernes  
+</div>
 
 ---
 
-## 🛠️ Technologies utilisées
+## ✨ Fonctionnalités
 
-- **React 18** – Bibliothèque UI moderne  
-- **Vite** – Build tool rapide et performant  
-- **TypeScript** – Typage statique pour un code sûr  
-- **Tailwind CSS** – Framework CSS moderne et responsive  
-- **Git & GitHub** – Versioning et hébergement du code  
+- **Thème Cinématique** — Dark/Light mode avec transition fluide et arrière-plan parallaxe dynamique
+- **Arrière-plan vivant** — Orbes colorées qui morphent selon la section active au scroll
+- **Cube 3D interactif** — Stack technique visualisé en 3D, draggable à la souris
+- **Curseur personnalisé** — Cercle, dot, I-beam (sélection texte), grab/grabbing (cube), blanc sur CV button
+- **Compteurs animés** — Statistiques (expérience, projets, entreprises) qui s'animent à l'entrée
+- **Barre de progression** — Indicateur de scroll lumineux en haut de page
+- **Formulaire de contact** — EmailJS avec auto-reply au visiteur
+- **Police Space Grotesk** — Typographie moderne et technique
+- **Responsive** — Mobile, tablette et desktop optimisés
+- **Animation au clic** — Rings d'onde sur la photo de profil
+
+---
+
+## 🛠️ Stack Technique
+
+| Catégorie | Technologies |
+|-----------|-------------|
+| **Framework** | React 18 + TypeScript |
+| **Build** | Vite 5 |
+| **Style** | Tailwind CSS + ShadCN UI |
+| **Formulaire** | EmailJS |
+| **Police** | Space Grotesk (Google Fonts) |
+| **Icônes** | Lucide React + Devicon |
+| **Versioning** | Git + GitHub |
 
 ---
 
 ## 🚀 Installation
 
-1. Cloner le dépôt :
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/YassirEdk/Eddakhouche-prtfl.git
+cd Eddakhouche-prtfl
 
-git clone https://github.com/YassirEdk/Eddakhouche-prtfl
-
-cd Portfolio
-
-2. Installer les dépendances :
-
+# 2. Installer les dépendances
 npm install
 
-ou
-
-yarn install
-
-3. Lancer le serveur de développement :
-
+# 3. Lancer le serveur de développement
 npm run dev
+```
 
-ou
+Ouvrir [http://localhost:8080](http://localhost:8080) dans le navigateur.
 
-yarn dev
+```bash
+# Build de production
+npm run build
+```
 
-Ouvrir le projet dans le navigateur à l’adresse affichée (par défaut http://localhost:8080).
+---
 
-📂 Structure du projet
+## 📁 Structure du projet
 
-Portfolio/
+```
+Eddakhouche-prtfl/
+├── public/
+│   ├── favicon.svg              # Icône personnalisée
+│   ├── preview.png              # Aperçu du portfolio
+│   └── ...                      # Logos des entreprises
+├── src/
+│   ├── components/
+│   │   ├── CinematicBackground.tsx  # Arrière-plan parallaxe dynamique
+│   │   ├── Cube3D.tsx               # Cube interactif 3D
+│   │   ├── Cursor.tsx               # Curseur personnalisé
+│   │   ├── Hero.tsx                 # Section principale
+│   │   ├── ExperienceCard.tsx       # Expériences professionnelles
+│   │   ├── Projects.tsx             # Projets académiques
+│   │   ├── Skills.tsx               # Compétences techniques
+│   │   ├── Certifications.tsx       # Certifications
+│   │   ├── Contact.tsx              # Formulaire de contact
+│   │   ├── Navbar.tsx               # Navigation
+│   │   ├── Footer.tsx               # Pied de page
+│   │   └── ScrollProgress.tsx       # Barre de progression
+│   ├── hooks/
+│   │   └── use-scroll-animation.tsx # Hook d'animation au scroll
+│   ├── pages/
+│   │   └── Index.tsx                # Page principale
+│   ├── App.tsx
+│   └── index.css                    # Variables CSS + thème
+├── index.html
+├── tailwind.config.ts
+└── package.json
+```
 
-├─ public/          # Images, GIFs, icônes
+---
 
-├─ src/             # Code source
+## 📬 Contact
 
-│  ├─ assets/       # Images et icônes
+| | |
+|---|---|
+| **Email** | [yassireddakhouche@gmail.com](mailto:yassireddakhouche@gmail.com) |
+| **LinkedIn** | [linkedin.com/in/yassir-eddakhouche](https://www.linkedin.com/in/yassir-eddakhouche/) |
+| **GitHub** | [github.com/YassirEdk](https://github.com/YassirEdk) |
+| **Téléphone** | +212 682-546896 |
+| **Localisation** | Casablanca, Maroc |
 
-│  ├─ components/   # Composants React réutilisables
+---
 
-│  ├─ pages/        # Pages principales
+<div align="center">
 
-│  └─ App.tsx       # Composant principal
+Made with ❤️ by **Yassir Eddakhouche**
 
-├─ vite.config.ts    # Configuration Vite
-
-├─ package.json      # Dépendances et scripts
-
-└─ tailwind.config.ts# Configuration Tailwind CSS
-
-🤝 Contact
-
-GitHub : https://github.com/YassirEdk
-
-Email : yassireddakhouche@gmail.com
-
-LinkedIn : https://www.linkedin.com/in/yassir-eddakhouche/
-
-Merci d’avoir visité mon portfolio ! 🚀
+</div>
