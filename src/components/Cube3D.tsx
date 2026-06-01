@@ -126,6 +126,7 @@ export const Cube3D = () => {
           justifyContent: "center",
           perspective: "900px",
           cursor: "grab",
+          touchAction: "none",
         }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}

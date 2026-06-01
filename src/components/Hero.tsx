@@ -198,7 +198,7 @@ export const Hero = () => {
 
           {/* ── 3D Cube — below content on small screens, beside on xl ── */}
           <div
-            className="flex-shrink-0 self-center scale-[0.45] sm:scale-[0.55] md:scale-[0.7] lg:scale-[0.85] xl:scale-100 -mt-[105px] -mb-[137px] sm:-mt-[80px] sm:-mb-[112px] md:-mt-[43px] md:-mb-[75px] lg:-mt-[5px] lg:-mb-[37px] xl:my-0"
+            className="flex-shrink-0 self-center scale-[0.65] sm:scale-[0.75] md:scale-[0.85] lg:scale-[0.9] xl:scale-100 -mt-[55px] -mb-[87px] sm:-mt-[30px] sm:-mb-[62px] md:-mt-[5px] md:-mb-[37px] lg:mt-[7px] lg:-mb-[25px] xl:my-0"
             style={{ transformOrigin: "center" }}
           >
             <Cube3D />
