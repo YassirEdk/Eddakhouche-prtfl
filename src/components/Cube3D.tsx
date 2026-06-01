@@ -81,7 +81,10 @@ export const Cube3D = () => {
     isDragging.current = true;
     lastPos.current = { x: e.clientX, y: e.clientY };
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    if (sceneRef.current) sceneRef.current.style.cursor = "grabbing";
+    if (sceneRef.current) {
+      sceneRef.current.style.cursor = "grabbing";
+      sceneRef.current.setAttribute("data-cursor", "grabbing");
+    }
   };
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -96,7 +99,10 @@ export const Cube3D = () => {
 
   const onPointerUp = () => {
     isDragging.current = false;
-    if (sceneRef.current) sceneRef.current.style.cursor = "grab";
+    if (sceneRef.current) {
+      sceneRef.current.style.cursor = "grab";
+      sceneRef.current.setAttribute("data-cursor", "grab");
+    }
   };
 
   return (
@@ -110,6 +116,7 @@ export const Cube3D = () => {
       {/* Scene: clips 3D overflow so faces never escape onto the labels */}
       <div
         ref={sceneRef}
+        data-cursor="grab"
         style={{
           width: SCENE,
           height: SCENE,

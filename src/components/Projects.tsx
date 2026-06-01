@@ -6,61 +6,37 @@ const projects = [
     title: "Gestion Restaurant",
     description: "Solution complète pour gérer les stocks, ventes et clients d'un restaurant, automatisant les processus pour optimiser la gestion.",
     technologies: ["Spring Boot", "React", "PostgreSQL"],
-    icon: "🍽️",
-    gradient: "from-orange-500/20 via-red-500/10 to-transparent",
-    accent: "#f97316",
-    border: "hover:border-orange-400/60",
-    shadow: "hover:shadow-orange-500/10",
+    icon: "🍽️", accent: "#f97316", glow: "rgba(249,115,22,0.12)", border: "hover:border-orange-500/40",
   },
   {
     title: "School Management",
     description: "Application permettant à une école de gérer, stocker, afficher et filtrer les informations des professeurs et des étudiants.",
     technologies: ["Spring Boot", "React", "PostgreSQL"],
-    icon: "🏫",
-    gradient: "from-blue-500/20 via-cyan-500/10 to-transparent",
-    accent: "#3b82f6",
-    border: "hover:border-blue-400/60",
-    shadow: "hover:shadow-blue-500/10",
+    icon: "🏫", accent: "#3b82f6", glow: "rgba(59,130,246,0.12)", border: "hover:border-blue-500/40",
   },
   {
     title: "Application de facturation",
     description: "Gestion des factures et paiements avec suivi automatisé des transactions, génération dynamique de factures et tableaux de bord interactifs.",
     technologies: ["Spring Boot", "React", "PostgreSQL"],
-    icon: "🧾",
-    gradient: "from-green-500/20 via-emerald-500/10 to-transparent",
-    accent: "#22c55e",
-    border: "hover:border-green-400/60",
-    shadow: "hover:shadow-green-500/10",
+    icon: "🧾", accent: "#22c55e", glow: "rgba(34,197,94,0.12)", border: "hover:border-green-500/40",
   },
   {
     title: "Little Lemon Food Order",
     description: "Application mobile pour la commande de nourriture avec interface utilisateur moderne et intuitive.",
     technologies: ["React Native", "PostgreSQL"],
-    icon: "🍋",
-    gradient: "from-yellow-500/20 via-amber-500/10 to-transparent",
-    accent: "#eab308",
-    border: "hover:border-yellow-400/60",
-    shadow: "hover:shadow-yellow-500/10",
+    icon: "🍋", accent: "#eab308", glow: "rgba(234,179,8,0.12)", border: "hover:border-yellow-500/40",
   },
   {
     title: "E-Commerce Management",
     description: "Application web de vente en ligne basée sur Odoo, offrant une interface fluide pour la gestion des produits, commandes et paiements.",
     technologies: ["Odoo", "PostgreSQL"],
-    icon: "🛒",
-    gradient: "from-purple-500/20 via-violet-500/10 to-transparent",
-    accent: "#a855f7",
-    border: "hover:border-purple-400/60",
-    shadow: "hover:shadow-purple-500/10",
+    icon: "🛒", accent: "#a855f7", glow: "rgba(168,85,247,0.12)", border: "hover:border-purple-500/40",
   },
   {
     title: "Rental Agency Management",
     description: "Application web de gestion de location de véhicules, permettant la réservation, le suivi des contrats et la facturation automatisée.",
     technologies: ["Odoo", "GraphHopperAPI", "PostgreSQL"],
-    icon: "🚗",
-    gradient: "from-pink-500/20 via-rose-500/10 to-transparent",
-    accent: "#ec4899",
-    border: "hover:border-pink-400/60",
-    shadow: "hover:shadow-pink-500/10",
+    icon: "🚗", accent: "#ec4899", glow: "rgba(236,72,153,0.12)", border: "hover:border-pink-500/40",
   },
 ];
 
@@ -77,50 +53,42 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
       <div
         ref={tiltRef}
         onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className={`relative group h-full rounded-2xl border border-border bg-card overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${project.border} ${project.shadow}`}
-        style={{ transition: "transform 0.15s ease-out, box-shadow 0.3s ease-out" }}
+        onMouseLeave={(e) => { handleMouseLeave(e); (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; }}
+        onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 40px ${project.glow}`; }}
+        className={`relative group h-full rounded-2xl border border-border/40 bg-card/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${project.border}`}
+        style={{ transition: "transform 0.15s ease-out, box-shadow 0.3s ease-out, border-color 0.3s" }}
       >
-        {/* Glare overlay */}
         <div data-glare className="absolute inset-0 rounded-2xl pointer-events-none z-10 transition-[background] duration-100" />
 
-        {/* Gradient header */}
-        <div className={`bg-gradient-to-br ${project.gradient} px-5 pt-5 pb-4`}>
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-3xl">{project.icon}</span>
-            <span
-              className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
-              style={{ background: `${project.accent}20`, color: project.accent, border: `1px solid ${project.accent}40` }}
-            >
+        {/* Screenshot / preview area */}
+        <div className="relative h-32 overflow-hidden rounded-t-2xl flex items-center justify-center"
+          style={{ background: `linear-gradient(135deg, ${project.accent}18, ${project.accent}06)` }}>
+          <div className="absolute inset-0 opacity-[0.07]" style={{
+            backgroundImage: `linear-gradient(${project.accent} 1px, transparent 1px), linear-gradient(90deg, ${project.accent} 1px, transparent 1px)`,
+            backgroundSize: "24px 24px",
+          }} />
+          <span className="text-6xl opacity-20 select-none">{project.icon}</span>
+          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card/50 to-transparent" />
+        </div>
+
+        <div className="px-5 pt-4 pb-3">
+          <div className="flex items-center justify-end mb-2">
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] px-2 py-0.5 rounded-full"
+              style={{ background: `${project.accent}15`, color: project.accent, border: `1px solid ${project.accent}30` }}>
               Projet
             </span>
           </div>
-          <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors leading-snug">
-            {project.title}
-          </h3>
+          <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
         </div>
 
-        {/* Divider */}
-        <div className="h-px mx-5" style={{ background: `linear-gradient(to right, ${project.accent}40, transparent)` }} />
+        <div className="h-px mx-5" style={{ background: `linear-gradient(to right,${project.accent}30,transparent)` }} />
 
-        {/* Content */}
         <div className="px-5 py-4 flex flex-col gap-4">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {project.description}
-          </p>
-
-          {/* Tech badges */}
+          <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
           <div className="flex flex-wrap gap-1.5">
             {project.technologies.map((tech, i) => (
-              <span
-                key={i}
-                className="text-xs font-medium px-2.5 py-0.5 rounded-full"
-                style={{
-                  background: `${project.accent}15`,
-                  color: project.accent,
-                  border: `1px solid ${project.accent}30`,
-                }}
-              >
+              <span key={i} className="text-xs font-medium px-2.5 py-0.5 rounded-full"
+                style={{ background: `${project.accent}12`, color: project.accent, border: `1px solid ${project.accent}28` }}>
                 {tech}
               </span>
             ))}
@@ -131,28 +99,22 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
   );
 };
 
-export const Projects = () => {
-  return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-background">
-      <div className="container max-w-6xl mx-auto">
-
-        {/* Header */}
-        <div className="text-center mb-10 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">
-            Projets Académiques
-          </h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
-            Une sélection de projets réalisés au cours de ma formation en informatique et réseaux.
-          </p>
-          <div className="w-12 h-1 rounded-full bg-gradient-to-r from-primary to-primary/30 mx-auto mt-4" />
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
-          ))}
-        </div>
+export const Projects = () => (
+  <section className="relative py-24 sm:py-32 px-4 sm:px-6">
+    <div className="container max-w-6xl mx-auto">
+      <div className="text-center mb-14">
+        <span className="section-eyebrow block mb-3">03 — Projets</span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-cinema-gradient mb-4">Projets Académiques</h2>
+        <p className="text-sm text-muted-foreground max-w-md mx-auto">
+          Une sélection de projets réalisés au cours de ma formation en informatique et réseaux.
+        </p>
+        <div className="w-12 h-px bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-5" />
       </div>
-    </section>
-  );
-};
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {projects.map((project, index) => (
+          <ProjectCard key={index} project={project} index={index} />
+        ))}
+      </div>
+    </div>
+  </section>
+);

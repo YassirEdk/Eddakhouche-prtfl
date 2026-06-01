@@ -1,61 +1,60 @@
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
 const isTouchDevice = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(pointer: coarse)").matches;
 
+type CursorMode = "default" | "hover" | "text" | "grab" | "grabbing" | "download";
+
 const CursorInner = () => {
-  const dotRef  = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const [hovered, setHovered] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const [mode, setMode]       = useState<CursorMode>("default");
   const [visible, setVisible] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+  const color  = isDark ? "#ffffff" : "#000000";
 
   useEffect(() => {
     let mouseX = 0, mouseY = 0;
-    let ringX  = 0, ringY  = 0;
+    let curX = 0, curY = 0;
     let rafId: number;
 
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       if (!visible) setVisible(true);
-
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
-      }
     };
 
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest("a, button, [role='button'], input, textarea, select")) {
-        setHovered(true);
-      }
-    };
+      const grabbing = target.closest("[data-cursor='grabbing']");
+      const grab     = target.closest("[data-cursor='grab']");
+      const text     = target.closest("[data-cursor='text']");
+      const download = target.closest("[data-cursor='download']");
+      const hover    = target.closest("a, button, [role='button'], input, textarea, select");
 
-    const onMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest("a, button, [role='button'], input, textarea, select")) {
-        setHovered(false);
-      }
+      if (grabbing)    setMode("grabbing");
+      else if (grab)   setMode("grab");
+      else if (text)   setMode("text");
+      else if (download) setMode("download");
+      else if (hover)  setMode("hover");
+      else             setMode("default");
     };
 
     const onMouseLeave = () => setVisible(false);
     const onMouseEnter = () => setVisible(true);
 
     const animate = () => {
-      ringX += (mouseX - ringX) * 0.1;
-      ringY += (mouseY - ringY) * 0.1;
-
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${ringX - 20}px, ${ringY - 20}px)`;
-      }
-
+      curX += (mouseX - curX) * 0.12;
+      curY += (mouseY - curY) * 0.12;
+      if (cursorRef.current)
+        cursorRef.current.style.transform = `translate(${curX}px, ${curY}px)`;
       rafId = requestAnimationFrame(animate);
     };
 
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseover",  onMouseOver);
-    window.addEventListener("mouseout",   onMouseOut);
     document.documentElement.addEventListener("mouseleave", onMouseLeave);
     document.documentElement.addEventListener("mouseenter", onMouseEnter);
     rafId = requestAnimationFrame(animate);
@@ -63,46 +62,79 @@ const CursorInner = () => {
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseover",  onMouseOver);
-      window.removeEventListener("mouseout",   onMouseOut);
       document.documentElement.removeEventListener("mouseleave", onMouseLeave);
       document.documentElement.removeEventListener("mouseenter", onMouseEnter);
       cancelAnimationFrame(rafId);
     };
   }, [visible]);
 
-  return (
-    <>
-      {/* Dot — follows instantly */}
-      <div
-        ref={dotRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full transition-opacity duration-300"
-        style={{
-          width: hovered ? 10 : 8,
-          height: hovered ? 10 : 8,
-          background: "hsl(var(--primary))",
-          opacity: visible ? 1 : 0,
-          marginTop: hovered ? -1 : 0,
-          marginLeft: hovered ? -1 : 0,
-          transition: "width 0.2s, height 0.2s, opacity 0.3s",
-        }}
-      />
+  const styles: Record<CursorMode, React.CSSProperties> = {
+    default: {
+      width: 28, height: 28,
+      marginLeft: -14, marginTop: -14,
+      borderRadius: "50%",
+      background: "transparent",
+      border: `1.5px solid ${color}`,
+    },
+    hover: {
+      width: 10, height: 10,
+      marginLeft: -5, marginTop: -5,
+      borderRadius: "50%",
+      background: color,
+      border: "none",
+    },
+    text: {
+      width: 2, height: 22,
+      marginLeft: -1, marginTop: -11,
+      borderRadius: "2px",
+      background: color,
+      border: "none",
+    },
+    grab: {
+      width: 36, height: 36,
+      marginLeft: -18, marginTop: -18,
+      borderRadius: "50%",
+      background: "transparent",
+      border: `1.5px dashed ${color}`,
+    },
+    grabbing: {
+      width: 18, height: 18,
+      marginLeft: -9, marginTop: -9,
+      borderRadius: "50%",
+      background: color,
+      border: "none",
+    },
+    download: {
+      width: 10, height: 10,
+      marginLeft: -5, marginTop: -5,
+      borderRadius: "50%",
+      background: "#ffffff",
+      border: "none",
+    },
+  };
 
-      {/* Ring — chases with delay */}
-      <div
-        ref={ringRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full"
-        style={{
-          width:  hovered ? 48 : 40,
-          height: hovered ? 48 : 40,
-          border: `2px solid hsl(var(--primary))`,
-          opacity: visible ? (hovered ? 0.8 : 0.45) : 0,
-          boxShadow: hovered ? "0 0 12px hsl(var(--primary) / 0.4)" : "none",
-          transition: "width 0.25s ease, height 0.25s ease, opacity 0.3s, box-shadow 0.25s",
-          marginTop:  hovered ? -4 : 0,
-          marginLeft: hovered ? -4 : 0,
-        }}
-      />
-    </>
+  const showCross = mode === "grab";
+
+  return (
+    <div
+      ref={cursorRef}
+      className="fixed top-0 left-0 pointer-events-none z-[9999]"
+      style={{
+        ...styles[mode],
+        mixBlendMode: (isDark || mode === "download") ? "difference" : "normal",
+        opacity: visible ? 1 : 0,
+        position: "fixed",
+        transition:
+          "width 0.2s ease, height 0.2s ease, margin 0.2s ease, border-radius 0.2s ease, background 0.2s ease, border 0.2s ease, opacity 0.3s ease",
+      }}
+    >
+      {showCross && (
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ position: "absolute", width: 12, height: 1.5, background: color, borderRadius: 1 }} />
+          <div style={{ position: "absolute", width: 1.5, height: 12, background: color, borderRadius: 1 }} />
+        </div>
+      )}
+    </div>
   );
 };
 

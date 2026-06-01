@@ -3,12 +3,10 @@ import emailjs from "@emailjs/browser";
 import { Send, CheckCircle, XCircle, Loader2, Mail, User, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// ── Fill these in from your EmailJS dashboard ──────────────────────────────
 const SERVICE_ID        = "service_j7dwn43";
-const TEMPLATE_ID       = "template_kckr4at";   // notification → Yassir
-const TEMPLATE_REPLY_ID = "template_7c810do";   // auto-reply  → sender
+const TEMPLATE_ID       = "template_kckr4at";
+const TEMPLATE_REPLY_ID = "template_7c810do";
 const PUBLIC_KEY        = "0IElcbHArpiFjJNJJ";
-// ──────────────────────────────────────────────────────────────────────────
 
 type Status = "idle" | "sending" | "success" | "fading" | "error";
 
@@ -24,18 +22,10 @@ export const Contact = () => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) return;
     setStatus("sending");
-
     try {
       const data = { name: form.name, email: form.email, message: form.message };
-
-      // Notification to Yassir
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, data, PUBLIC_KEY);
-
-      // Auto-reply to sender
-      await emailjs.send(SERVICE_ID, TEMPLATE_REPLY_ID, {
-        ...data,
-        from_name: "Eddakhouche Yassir",
-      }, PUBLIC_KEY);
+      await emailjs.send(SERVICE_ID, TEMPLATE_REPLY_ID, { ...data, from_name: "Eddakhouche Yassir" }, PUBLIC_KEY);
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
       setTimeout(() => setStatus("fading"), 2000);
@@ -46,92 +36,51 @@ export const Contact = () => {
     }
   };
 
-  return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-secondary/30">
-      <div className="container max-w-2xl mx-auto">
+  const inputClass =
+    "w-full pl-10 pr-4 py-3 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/40 focus:shadow-[0_0_20px_hsl(var(--primary)/0.12)] transition-all";
 
-        {/* Header */}
-        <div className="text-center mb-10 sm:mb-14">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">
-            Me Contacter
-          </h2>
-          <p className="text-sm sm:text-base text-muted-foreground">
+  return (
+    <section className="relative py-24 sm:py-32 px-4 sm:px-6">
+      <div className="container max-w-2xl mx-auto">
+        <div className="text-center mb-12">
+          <span className="section-eyebrow block mb-3">06 — Contact</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-cinema-gradient mb-4">Me Contacter</h2>
+          <p className="text-sm text-muted-foreground">
             Une question, une opportunité ? Envoyez-moi un message, je vous réponds rapidement.
           </p>
-          <div className="w-12 h-1 rounded-full bg-gradient-to-r from-primary to-primary/30 mx-auto mt-4" />
+          <div className="w-12 h-px bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-5" />
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-
-          {/* Name */}
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Votre nom"
-              required
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-card text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-            />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
+            <input name="name" value={form.name} onChange={handleChange} placeholder="Votre nom" required className={inputClass} />
+          </div>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
+            <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Votre email" required className={inputClass} />
+          </div>
+          <div className="relative">
+            <MessageSquare className="absolute left-3 top-4 w-4 h-4 text-muted-foreground/60" />
+            <textarea name="message" value={form.message} onChange={handleChange} placeholder="Votre message..." required rows={5} className={`${inputClass} resize-none`} />
           </div>
 
-          {/* Email */}
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="Votre email"
-              required
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-card text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-            />
-          </div>
-
-          {/* Message */}
-          <div className="relative">
-            <MessageSquare className="absolute left-3 top-4 w-4 h-4 text-muted-foreground" />
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="Votre message..."
-              required
-              rows={5}
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-card text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
-            />
-          </div>
-
-          {/* Submit button */}
-          <Button
-            type="submit"
-            disabled={status === "sending"}
-            className="w-full gap-2 py-3 text-sm font-semibold rounded-xl"
-          >
-            {status === "sending" ? (
-              <><Loader2 className="w-4 h-4 animate-spin" />Envoi en cours...</>
-            ) : (
-              <><Send className="w-4 h-4" />Envoyer le message</>
-            )}
+          <Button type="submit" disabled={status === "sending"}
+            className="w-full gap-2 py-3 text-sm font-bold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_hsl(var(--primary)/0.35)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.5)] transition-all">
+            {status === "sending"
+              ? <><Loader2 className="w-4 h-4 animate-spin" />Envoi en cours...</>
+              : <><Send className="w-4 h-4" />Envoyer le message</>}
           </Button>
 
-          {/* Success */}
           {(status === "success" || status === "fading") && (
-            <div
-              className="flex items-center gap-2 text-green-600 dark:text-green-400 bg-green-500/10 border border-green-500/20 rounded-xl px-4 py-3 text-sm"
-              style={{ opacity: status === "fading" ? 0 : 1, transition: "opacity 1s ease" }}
-            >
+            <div className="flex items-center gap-2 text-green-400 bg-green-500/8 border border-green-500/20 rounded-xl px-4 py-3 text-sm"
+              style={{ opacity: status === "fading" ? 0 : 1, transition: "opacity 1s ease" }}>
               <CheckCircle className="w-4 h-4 flex-shrink-0" />
               Message envoyé avec succès ! Je vous répondrai bientôt.
             </div>
           )}
-
-          {/* Error */}
           {status === "error" && (
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-sm">
+            <div className="flex items-center gap-2 text-red-400 bg-red-500/8 border border-red-500/20 rounded-xl px-4 py-3 text-sm">
               <XCircle className="w-4 h-4 flex-shrink-0" />
               Une erreur s'est produite. Veuillez réessayer.
             </div>
