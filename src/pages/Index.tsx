@@ -1,3 +1,5 @@
+import { Navbar } from "@/components/Navbar";
+import { Cursor } from "@/components/Cursor";
 import { Hero } from "@/components/Hero";
 import { Experience } from "@/components/ExperienceCard";
 import { Projects } from "@/components/Projects";
@@ -8,11 +10,13 @@ import { Footer } from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <Hero />
-      <Experience />
-      <Projects />
-      <Skills />
-      <Certifications />
+      <Cursor />
+      <Navbar />
+      <div id="hero"><Hero /></div>
+      <div id="experience"><Experience /></div>
+      <div id="projects"><Projects /></div>
+      <div id="skills"><Skills /></div>
+      <div id="certifications"><Certifications /></div>
       <Footer />
     </div>
   );

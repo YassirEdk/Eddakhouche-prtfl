@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const certifications = [
   {
@@ -25,29 +25,42 @@ const certifications = [
   }
 ];
 
+const CertCard = ({ cert, index }: { cert: typeof certifications[0]; index: number }) => {
+  const { ref, visible } = useScrollAnimation();
+  return (
+    <div
+      ref={ref}
+      className={`group rounded-xl border border-border bg-card p-5 shadow-sm transition-all duration-700 hover:shadow-md hover:border-primary/30 hover:-translate-y-0.5 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      <div className="mb-4">
+        <h3 className="font-semibold text-foreground text-base group-hover:text-primary transition-colors mb-1">
+          {cert.title}
+        </h3>
+        <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+      </div>
+      <Button variant="outline" size="sm" asChild className="gap-2 text-xs">
+        <a href={cert.link} target="_blank" rel="noopener noreferrer">
+          Voir la certification
+          <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+      </Button>
+    </div>
+  );
+};
+
 export const Certifications = () => {
   return (
-    <section className="py-16 px-4 bg-secondary/30">
+    <section className="py-12 sm:py-20 px-4 sm:px-6 bg-background">
       <div className="container max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 sm:mb-16 text-foreground">
           Certifications
         </h2>
         <div className="grid md:grid-cols-2 gap-6">
           {certifications.map((cert, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-lg break-words">{cert.title}</CardTitle>
-                <CardDescription className="break-words">{cert.issuer}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" size="sm" asChild className="gap-2">
-                  <a href={cert.link} target="_blank" rel="noopener noreferrer">
-                    Voir la certification
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
+            <CertCard key={index} cert={cert} index={index} />
           ))}
         </div>
       </div>

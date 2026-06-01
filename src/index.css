@@ -90,9 +90,38 @@ All colors MUST be HSL.
 @layer base {
   * {
     @apply border-border;
+    cursor: none !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @keyframes float-1 {
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    33%       { transform: translateY(-28px) translateX(18px) rotate(120deg); }
+    66%       { transform: translateY(18px) translateX(-18px) rotate(240deg); }
+  }
+  @keyframes float-2 {
+    0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    50%      { transform: translateY(-36px) translateX(-24px) rotate(180deg); }
+  }
+  @keyframes float-3 {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25%      { transform: translateY(-18px) translateX(14px) rotate(90deg); }
+    75%      { transform: translateY(22px) translateX(-12px) rotate(270deg); }
+  }
+
+  .animate-float-1 { animation: float-1 8s ease-in-out infinite; }
+  .animate-float-2 { animation: float-2 11s ease-in-out infinite; }
+  .animate-float-3 { animation: float-3 14s ease-in-out infinite; }
+
+  @keyframes spinCube {
+    0%   { transform: rotateX(15deg) rotateY(0deg); }
+    100% { transform: rotateX(15deg) rotateY(360deg); }
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground select-none;
   }
 }
