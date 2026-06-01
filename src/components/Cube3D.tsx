@@ -5,42 +5,12 @@ const HALF  = SIZE / 2;
 const SCENE = 500;   // scene container – large enough to contain any rotation
 
 const faces = [
-  {
-    transform: `rotateY(0deg)   translateZ(${HALF}px)`,
-    label: "React",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-    color: "#61DAFB",
-  },
-  {
-    transform: `rotateY(180deg) translateZ(${HALF}px)`,
-    label: "Odoo",
-    logo: "https://cdn.simpleicons.org/odoo/875A7B",
-    color: "#A855F7",
-  },
-  {
-    transform: `rotateY(90deg)  translateZ(${HALF}px)`,
-    label: "Spring Boot",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg",
-    color: "#6DB33F",
-  },
-  {
-    transform: `rotateY(-90deg) translateZ(${HALF}px)`,
-    label: "Python",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-    color: "#FFD343",
-  },
-  {
-    transform: `rotateX(90deg)  translateZ(${HALF}px)`,
-    label: "PostgreSQL",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-    color: "#336791",
-  },
-  {
-    transform: `rotateX(-90deg) translateZ(${HALF}px)`,
-    label: "JavaScript",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-    color: "#F7DF1E",
-  },
+  { transform: `rotateY(0deg)   translateZ(${HALF}px)`, label: "React",       logo: "/logos/react.svg",      color: "#61DAFB" },
+  { transform: `rotateY(180deg) translateZ(${HALF}px)`, label: "Odoo",        logo: "/logos/odoo.svg",       color: "#A855F7" },
+  { transform: `rotateY(90deg)  translateZ(${HALF}px)`, label: "Spring Boot", logo: "/logos/spring.svg",     color: "#6DB33F" },
+  { transform: `rotateY(-90deg) translateZ(${HALF}px)`, label: "Python",      logo: "/logos/python.svg",     color: "#FFD343" },
+  { transform: `rotateX(90deg)  translateZ(${HALF}px)`, label: "PostgreSQL",  logo: "/logos/postgresql.svg", color: "#336791" },
+  { transform: `rotateX(-90deg) translateZ(${HALF}px)`, label: "JavaScript",  logo: "/logos/javascript.svg", color: "#F7DF1E" },
 ];
 
 export const Cube3D = () => {
