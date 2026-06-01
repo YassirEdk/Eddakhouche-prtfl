@@ -61,9 +61,9 @@ export const Hero = () => {
             </p>
 
             {/* Buttons + Cards in shared container so they share the same width */}
-            <div className="w-fit mx-auto flex flex-col gap-3 mt-1">
+            <div className="w-full flex flex-col gap-3 mt-1 items-center">
 
-              <div className="flex flex-nowrap gap-2">
+              <div className="flex flex-wrap justify-center gap-2">
                 <Button variant="default" size="sm" asChild className="gap-2 whitespace-nowrap">
                   <a href="mailto:yassireddakhouche@gmail.com">
                     <Mail className="w-4 h-4" />Email

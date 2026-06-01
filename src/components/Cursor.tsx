@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-export const Cursor = () => {
+const isTouchDevice = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(pointer: coarse)").matches;
+
+const CursorInner = () => {
   const dotRef  = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
@@ -100,4 +104,9 @@ export const Cursor = () => {
       />
     </>
   );
+};
+
+export const Cursor = () => {
+  if (isTouchDevice()) return null;
+  return <CursorInner />;
 };
