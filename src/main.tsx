@@ -4,14 +4,17 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 
-// Remove loading screen once React has painted
-requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    const loader = document.getElementById("loader");
-    if (loader) {
-      loader.style.opacity = "0";
-      loader.style.pointerEvents = "none";
-      setTimeout(() => loader.remove(), 500);
-    }
-  });
-});
+// Hide loader only after everything is fully loaded
+const hideLoader = () => {
+  const loader = document.getElementById("loader");
+  if (!loader) return;
+  loader.style.opacity = "0";
+  loader.style.pointerEvents = "none";
+  setTimeout(() => loader.remove(), 600);
+};
+
+if (document.readyState === "complete") {
+  hideLoader();
+} else {
+  window.addEventListener("load", hideLoader);
+}
