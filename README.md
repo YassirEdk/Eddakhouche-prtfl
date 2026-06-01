@@ -15,7 +15,7 @@
 
 ---
 
-![Portfolio Preview](public/preview.png)
+![Portfolio Preview](public/screenshot.png)
 
 </div>
 
