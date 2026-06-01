@@ -81,6 +81,7 @@ export const Cube3D = () => {
     isDragging.current = true;
     lastPos.current = { x: e.clientX, y: e.clientY };
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    document.body.style.overflow = "hidden";
     if (sceneRef.current) {
       sceneRef.current.style.cursor = "grabbing";
       sceneRef.current.setAttribute("data-cursor", "grabbing");
@@ -89,6 +90,7 @@ export const Cube3D = () => {
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging.current) return;
+    e.preventDefault();
     const dx = e.clientX - lastPos.current.x;
     const dy = e.clientY - lastPos.current.y;
     rotation.current.y += dx * 0.5;
@@ -99,6 +101,7 @@ export const Cube3D = () => {
 
   const onPointerUp = () => {
     isDragging.current = false;
+    document.body.style.overflow = "";
     if (sceneRef.current) {
       sceneRef.current.style.cursor = "grab";
       sceneRef.current.setAttribute("data-cursor", "grab");
