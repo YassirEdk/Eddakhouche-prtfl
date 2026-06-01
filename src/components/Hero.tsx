@@ -103,10 +103,11 @@ export const Hero = () => {
               <div className="relative w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full p-[2px] bg-gradient-to-br from-primary via-primary/40 to-accent/30 shadow-[0_0_50px_hsl(var(--primary)/0.25)]">
                 <div className="w-full h-full rounded-full overflow-hidden">
                   <img
-                    src="https://l.top4top.io/p_35787glj01.jpg"
+                    src="/profile.jpg"
                     alt="Yassir Eddakhouche"
                     className="w-full h-full object-cover select-none"
                     draggable={false}
+                    fetchPriority="high"
                   />
                 </div>
               </div>

@@ -11,6 +11,7 @@ const CompanyLogo = ({ logo, initials, color, company }: { logo: string; initial
         alt={company}
         onError={() => setError(true)}
         className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl object-contain bg-white border border-white/20 p-2 flex-shrink-0 shadow-[0_0_12px_rgba(0,0,0,0.3)]"
+        loading="lazy"
       />
     );
   }
