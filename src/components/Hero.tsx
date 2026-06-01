@@ -90,6 +90,11 @@ export const Hero = () => {
               <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-transparent to-primary/50" />
             </div>
 
+            {/* Cube — mobile only (visible right after name) */}
+            <div className="xl:hidden flex justify-center w-full scale-[0.7] -mt-[75px] -mb-[75px]" style={{ transformOrigin: "center" }}>
+              <Cube3D />
+            </div>
+
             {/* Photo */}
             <div className="relative flex-shrink-0" onClick={() => setBurst(c => c + 1)}>
               {/* Burst rings — key forces remount on each click */}
@@ -197,11 +202,8 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* ── 3D Cube — below content on small screens, beside on xl ── */}
-          <div
-            className="flex-shrink-0 self-center scale-[0.85] sm:scale-[0.75] md:scale-[0.85] lg:scale-[0.9] xl:scale-100 -mt-[5px] -mb-[37px] sm:-mt-[30px] sm:-mb-[62px] md:-mt-[5px] md:-mb-[37px] lg:mt-[7px] lg:-mb-[25px] xl:my-0"
-            style={{ transformOrigin: "center" }}
-          >
+          {/* ── 3D Cube — desktop only beside content ── */}
+          <div className="hidden xl:block flex-shrink-0 self-center">
             <Cube3D />
           </div>
         </div>
