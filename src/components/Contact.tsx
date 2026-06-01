@@ -40,7 +40,7 @@ export const Contact = () => {
     "w-full pl-10 pr-4 py-3 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm text-foreground text-sm placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/40 focus:shadow-[0_0_20px_hsl(var(--primary)/0.12)] transition-all";
 
   return (
-    <section className="relative py-24 sm:py-32 px-4 sm:px-6">
+    <section className="relative py-16 sm:py-24 lg:py-32 px-4 sm:px-6">
       <div className="container max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <span className="section-eyebrow block mb-3">06 — Contact</span>
@@ -62,7 +62,7 @@ export const Contact = () => {
           </div>
           <div className="relative">
             <MessageSquare className="absolute left-3 top-4 w-4 h-4 text-muted-foreground/60" />
-            <textarea name="message" value={form.message} onChange={handleChange} placeholder="Votre message..." required rows={5} className={`${inputClass} resize-none`} />
+            <textarea name="message" value={form.message} onChange={handleChange} placeholder="Votre message..." required rows={4} className={`${inputClass} resize-none`} />
           </div>
 
           <Button type="submit" disabled={status === "sending"}

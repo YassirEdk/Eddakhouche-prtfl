@@ -10,13 +10,13 @@ const CompanyLogo = ({ logo, initials, color, company }: { logo: string; initial
         src={logo}
         alt={company}
         onError={() => setError(true)}
-        className="w-20 h-20 rounded-xl object-contain bg-white border border-white/20 p-2 flex-shrink-0 shadow-[0_0_12px_rgba(0,0,0,0.3)]"
+        className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl object-contain bg-white border border-white/20 p-2 flex-shrink-0 shadow-[0_0_12px_rgba(0,0,0,0.3)]"
       />
     );
   }
   return (
     <div
-      className="w-14 h-14 rounded-xl flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+      className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
       style={{ background: `${color}33`, border: `1px solid ${color}55` }}
     >
       {initials}
@@ -40,15 +40,15 @@ const experiences = [
           <span className="inline-block w-1 h-1 bg-primary rounded-full mt-2 flex-shrink-0 shadow-[0_0_6px_hsl(var(--primary))]" />
           Conception et développement de deux solutions Odoo complètes pour deux clients distincts dans les domaines RH et e-commerce.
         </p>
-        <p className="flex items-start gap-3 ml-4">
+        <p className="flex items-start gap-3 ml-2 sm:ml-4">
           <span className="inline-block w-1 h-1 bg-border rounded-full mt-2 flex-shrink-0" />
           Développement d'un système de gestion RH sur Odoo 18 (congés, présences, workflows de validation, synchronisation pointeuses) pour MedAfrica Logistics.
         </p>
-        <p className="flex items-start gap-3 ml-4">
+        <p className="flex items-start gap-3 ml-2 sm:ml-4">
           <span className="inline-block w-1 h-1 bg-border rounded-full mt-2 flex-shrink-0" />
           Création d'une plateforme unifiée pour Outletna incluant un portail Helpdesk sécurisé et 5 modules métier.
         </p>
-        <p className="flex items-start gap-3 ml-4">
+        <p className="flex items-start gap-3 ml-2 sm:ml-4">
           <span className="inline-block w-1 h-1 bg-border rounded-full mt-2 flex-shrink-0" />
           Synchronisation bidirectionnelle PrestaShop.
         </p>
@@ -71,15 +71,15 @@ const experiences = [
           <span className="inline-block w-1 h-1 bg-primary rounded-full mt-2 flex-shrink-0 shadow-[0_0_6px_hsl(var(--primary))]" />
           Réalisation d'un projet (Optifuel) pour Afriquia SMDC
         </p>
-        <p className="flex items-start gap-3 ml-4">
+        <p className="flex items-start gap-3 ml-2 sm:ml-4">
           <span className="inline-block w-1 h-1 bg-border rounded-full mt-2 flex-shrink-0" />
           Création d'un portail clients pour le passage des commandes
         </p>
-        <p className="flex items-start gap-3 ml-4">
+        <p className="flex items-start gap-3 ml-2 sm:ml-4">
           <span className="inline-block w-1 h-1 bg-border rounded-full mt-2 flex-shrink-0" />
           Automatisation des affectations de commandes aux camions selon les contraintes métiers
         </p>
-        <p className="flex items-start gap-3 ml-4">
+        <p className="flex items-start gap-3 ml-2 sm:ml-4">
           <span className="inline-block w-1 h-1 bg-border rounded-full mt-2 flex-shrink-0" />
           Calcul et optimisation des trajets via l'API GraphHopper
         </p>
@@ -102,7 +102,7 @@ const experiences = [
           <span className="inline-block w-1 h-1 bg-primary rounded-full mt-2 flex-shrink-0 shadow-[0_0_6px_hsl(var(--primary))]" />
           Mise en place d'une solution NAC avec PacketFence
         </p>
-        <p className="flex items-start gap-3 ml-4">
+        <p className="flex items-start gap-3 ml-2 sm:ml-4">
           <span className="inline-block w-1 h-1 bg-border rounded-full mt-2 flex-shrink-0" />
           Configuration des switchs et authentification centralisée.
         </p>
@@ -136,7 +136,7 @@ const ExperienceItem = ({ exp, index }: { exp: typeof experiences[0]; index: num
 
       {/* Card */}
       <div
-        className={`flex-1 mb-8 rounded-2xl border bg-card/50 backdrop-blur-sm p-5 transition-all duration-300 ${
+        className={`flex-1 mb-8 rounded-2xl border bg-card/50 backdrop-blur-sm p-3 sm:p-5 transition-all duration-300 ${
           exp.current
             ? "border-primary/30 hover:border-primary/60 hover:shadow-[0_0_30px_hsl(var(--primary)/0.1)]"
             : "border-border/40 hover:border-primary/20 hover:shadow-[0_0_20px_hsl(var(--primary)/0.06)]"
@@ -185,7 +185,7 @@ const ExperienceItem = ({ exp, index }: { exp: typeof experiences[0]; index: num
 };
 
 export const Experience = () => (
-  <section className="relative py-24 sm:py-32 px-4 sm:px-6">
+  <section className="relative py-16 sm:py-24 lg:py-32 px-4 sm:px-6">
     <div className="container max-w-4xl mx-auto">
       <div className="text-center mb-14">
         <span className="section-eyebrow block mb-3">02 — Expériences</span>

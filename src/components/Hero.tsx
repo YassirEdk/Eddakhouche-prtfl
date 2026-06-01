@@ -65,7 +65,7 @@ export const Hero = () => {
       </div>
 
       <div className="container max-w-7xl relative z-10 w-full">
-        <div className="flex flex-col xl:flex-row items-center justify-center gap-8 xl:gap-[300px]">
+        <div className="flex flex-col xl:flex-row items-center justify-center gap-8 xl:gap-[80px] 2xl:gap-[220px]">
 
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col items-center text-center gap-5 w-full max-w-xl">
@@ -122,7 +122,7 @@ export const Hero = () => {
             </p>
 
             {/* Animated stats */}
-            <div className="flex items-center justify-center gap-6 sm:gap-10 w-full py-2">
+            <div className="flex items-center justify-center gap-4 sm:gap-10 w-full py-2">
               {stats.map((stat, i) => (
                 <StatCard key={i} stat={stat} />
               ))}
@@ -165,26 +165,26 @@ export const Hero = () => {
               </div>
 
               {/* Primary CTA */}
-              <Button asChild data-cursor="download" className="gap-2 w-full max-w-xs bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_25px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)] transition-all">
+              <Button asChild data-cursor="download" className="gap-2 w-full max-w-xs bg-primary text-white hover:bg-primary/90 shadow-[0_0_25px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)] transition-all">
                 <a href="https://drive.usercontent.google.com/u/0/uc?id=1d2yXbGIH0BqWnObPQsqaTpsjhsvRJQLe&export=download" download>
                   <Download className="w-4 h-4" />Télécharger mon CV
                 </a>
               </Button>
 
               {/* Info cards */}
-              <div className="flex gap-2 w-full text-left">
-                <div className="glass-card flex-1 rounded-xl p-3 min-w-0">
+              <div className="flex flex-col sm:flex-row gap-2 w-full text-left">
+                <div className="glass-card flex-1 rounded-xl p-3">
                   <h3 className="section-eyebrow mb-1.5">Localisation</h3>
                   <div className="flex items-center gap-1.5 text-sm text-foreground">
                     <MapPin className="w-3.5 h-3.5 text-primary flex-shrink-0" />
                     <span className="whitespace-nowrap">Casablanca, Maroc</span>
                   </div>
                 </div>
-                <div className="glass-card flex-1 rounded-xl p-3 min-w-0">
+                <div className="glass-card flex-1 rounded-xl p-3">
                   <h3 className="section-eyebrow mb-1.5">Formation</h3>
                   <Badge variant="secondary" className="text-xs bg-primary/10 text-primary border-primary/20 whitespace-nowrap">EMSI - MIAGE (2025)</Badge>
                 </div>
-                <div className="glass-card flex-[1.3] rounded-xl p-3 min-w-0">
+                <div className="glass-card flex-1 rounded-xl p-3">
                   <h3 className="section-eyebrow mb-1.5">Langues</h3>
                   <div className="flex flex-nowrap gap-1.5">
                     <Badge variant="outline" className="text-xs border-border/50 text-muted-foreground">Arabe</Badge>
@@ -196,8 +196,13 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* ── RIGHT COLUMN: 3D Cube (xl only) ── */}
-          <Cube3D />
+          {/* ── 3D Cube — below content on small screens, beside on xl ── */}
+          <div
+            className="flex-shrink-0 self-center scale-[0.45] sm:scale-[0.55] md:scale-[0.7] lg:scale-[0.85] xl:scale-100 -mt-[105px] -mb-[137px] sm:-mt-[80px] sm:-mb-[112px] md:-mt-[43px] md:-mb-[75px] lg:-mt-[5px] lg:-mb-[37px] xl:my-0"
+            style={{ transformOrigin: "center" }}
+          >
+            <Cube3D />
+          </div>
         </div>
       </div>
     </section>

@@ -106,7 +106,7 @@ export const Cube3D = () => {
   };
 
   return (
-    <div className="hidden xl:flex flex-col items-center flex-shrink-0 self-center select-none">
+    <div className="flex flex-col items-center flex-shrink-0 self-center select-none">
 
       {/* Label above — safely outside the clipped scene */}
       <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">

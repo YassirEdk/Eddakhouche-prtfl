@@ -33,7 +33,7 @@ const CertCard = ({ cert, index }: { cert: typeof certifications[0]; index: numb
 };
 
 export const Certifications = () => (
-  <section className="relative py-24 sm:py-32 px-4 sm:px-6">
+  <section className="relative py-16 sm:py-24 lg:py-32 px-4 sm:px-6">
     <div className="container max-w-6xl mx-auto">
       <div className="text-center mb-14">
         <span className="section-eyebrow block mb-3">05 — Certifications</span>

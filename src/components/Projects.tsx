@@ -100,7 +100,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
 };
 
 export const Projects = () => (
-  <section className="relative py-24 sm:py-32 px-4 sm:px-6">
+  <section className="relative py-16 sm:py-24 lg:py-32 px-4 sm:px-6">
     <div className="container max-w-6xl mx-auto">
       <div className="text-center mb-14">
         <span className="section-eyebrow block mb-3">03 — Projets</span>
