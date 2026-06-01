@@ -12,6 +12,20 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" />
 
+    <!-- Prevent white flash: apply dark class and background before React loads -->
+    <style>html { background: hsl(225,55%,4%); }</style>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme = stored || 'dark';
+          document.documentElement.classList.add(theme);
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
     <meta property="og:title" content="Yassir Eddakhouche - Ingénieur Informatique & Réseau" />
     <meta property="og:description" content="Portfolio de Yassir Eddakhouche, Ingénieur d'État en Informatique & Réseau spécialisé en développement full-stack" />
     <meta property="og:type" content="website" />
