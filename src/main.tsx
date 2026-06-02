@@ -4,14 +4,13 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 
-let windowLoaded = false;
-let reactPainted = false;
-let revealed     = false;
+const pageStart = Date.now();
+const MIN_MS    = 2200; // neon E shows for at least this long
+let   revealed  = false;
 
 const doReveal = () => {
   if (revealed) return;
   revealed = true;
-  clearTimeout(safetyTimer);
   const root   = document.getElementById("root");
   const loader = document.getElementById("loader");
   if (root) {
@@ -24,25 +23,20 @@ const doReveal = () => {
     loader.style.pointerEvents = "none";
     setTimeout(() => loader.remove(), 800);
   }
-  // Tell React components the site is now visible so they can start their animations
   window.dispatchEvent(new Event("site-revealed"));
 };
 
-const maybeReveal = () => {
-  if (!windowLoaded || !reactPainted) return;
-  // 1400 ms settle: covers CSS 3D init, cube logo renders, lazy chunks, and counter observers
-  setTimeout(doReveal, 1400);
-};
-
-(window as any).__signalReady = () => { reactPainted = true; maybeReveal(); };
-
-// Safety valve — never stuck forever
-const safetyTimer = setTimeout(doReveal, 10_000);
-
+// Wait for everything (fonts + all page resources), then pad to MIN_MS minimum
 Promise.all([
   document.fonts.ready,
   new Promise<void>(r => {
     if (document.readyState === "complete") r();
-    else window.addEventListener("load", () => r(), { once: true });
+    else window.addEventListener("load", r as EventListener, { once: true });
   }),
-]).then(() => { windowLoaded = true; maybeReveal(); });
+]).then(() => {
+  const remaining = MIN_MS - (Date.now() - pageStart);
+  setTimeout(doReveal, Math.max(0, remaining));
+});
+
+// Absolute safety net — never stuck forever
+setTimeout(doReveal, 12_000);

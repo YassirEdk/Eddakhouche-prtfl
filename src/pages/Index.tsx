@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy } from "react";
 import { Navbar }             from "@/components/Navbar";
 import { Cursor }             from "@/components/Cursor";
 import { Hero }               from "@/components/Hero";
@@ -18,17 +18,7 @@ const SectionFallback = () => (
   </div>
 );
 
-const Index = () => {
-  useEffect(() => {
-    // Two RAF frames ensure the browser has actually committed a paint before revealing
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => {
-        (window as any).__signalReady?.();
-      })
-    );
-  }, []);
-
-  return (
+const Index = () => (
   <div className="min-h-screen">
     <CinematicBackground />
     <ScrollProgress />
@@ -54,7 +44,6 @@ const Index = () => {
       <Footer />
     </Suspense>
   </div>
-  );
-};
+);
 
 export default Index;
