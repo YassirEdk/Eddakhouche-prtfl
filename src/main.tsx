@@ -14,18 +14,22 @@ const doReveal = () => {
   clearTimeout(safetyTimer);
   const root   = document.getElementById("root");
   const loader = document.getElementById("loader");
-  if (root)   { root.style.visibility = "visible"; root.style.opacity = "1"; }
+  if (root) {
+    root.style.visibility = "visible";
+    root.style.opacity    = "1";
+    root.style.transform  = "translateY(0)";
+  }
   if (loader) {
     loader.style.opacity       = "0";
     loader.style.pointerEvents = "none";
-    setTimeout(() => loader.remove(), 600);
+    setTimeout(() => loader.remove(), 800);
   }
 };
 
 const maybeReveal = () => {
   if (!windowLoaded || !reactPainted) return;
-  // 900 ms settle buffer: lets CSS 3D, counter observers, and lazy chunks finish
-  setTimeout(doReveal, 900);
+  // 1400 ms settle: covers CSS 3D init, cube logo renders, lazy chunks, and counter observers
+  setTimeout(doReveal, 1400);
 };
 
 (window as any).__signalReady = () => { reactPainted = true; maybeReveal(); };
