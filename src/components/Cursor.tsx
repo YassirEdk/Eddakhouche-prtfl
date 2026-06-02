@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
 const isTouchDevice = () =>
   typeof window !== "undefined" &&
@@ -6,12 +7,12 @@ const isTouchDevice = () =>
 
 type Mode = "dot" | "text" | "target";
 
-const CYAN = "#ffffff";
-
 const CursorInner = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [mode, setMode]       = useState<Mode>("dot");
   const [visible, setVisible] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const COLOR = resolvedTheme === "light" ? "#000000" : "#ffffff";
 
   useEffect(() => {
     let mx = 0, my = 0, cx = 0, cy = 0, raf = 0;
@@ -62,16 +63,16 @@ const CursorInner = () => {
       width: 10, height: 10,
       marginLeft: -5, marginTop: -5,
       borderRadius: "50%",
-      background: CYAN,
-      boxShadow: `0 0 6px ${CYAN}, 0 0 18px ${CYAN}88`,
+      background: COLOR,
+      boxShadow: `0 0 6px ${COLOR}, 0 0 18px ${COLOR}88`,
     },
     // 2 · text I-beam
     text: {
       width: 2, height: 22,
       marginLeft: -1, marginTop: -11,
       borderRadius: 2,
-      background: CYAN,
-      boxShadow: `0 0 6px ${CYAN}`,
+      background: COLOR,
+      boxShadow: `0 0 6px ${COLOR}`,
     },
     // 4 · crosshair target (cube)
     target: {
@@ -79,8 +80,8 @@ const CursorInner = () => {
       marginLeft: -16, marginTop: -16,
       borderRadius: "50%",
       background: "transparent",
-      border: `1.5px solid ${CYAN}88`,
-      boxShadow: `0 0 10px ${CYAN}44`,
+      border: `1.5px solid ${COLOR}88`,
+      boxShadow: `0 0 10px ${COLOR}44`,
     },
   };
 
@@ -92,11 +93,11 @@ const CursorInner = () => {
       {isTarget && (
         <>
           {/* center dot */}
-          <div style={{ position:"absolute", top:"50%", left:"50%", width:4, height:4, marginLeft:-2, marginTop:-2, borderRadius:"50%", background:CYAN, boxShadow:`0 0 6px ${CYAN}` }} />
+          <div style={{ position:"absolute", top:"50%", left:"50%", width:4, height:4, marginLeft:-2, marginTop:-2, borderRadius:"50%", background:COLOR, boxShadow:`0 0 6px ${COLOR}` }} />
           {/* horizontal bar */}
-          <div style={{ position:"absolute", top:"50%", left:4, right:4, height:1, marginTop:-0.5, background:CYAN+"99" }} />
+          <div style={{ position:"absolute", top:"50%", left:4, right:4, height:1, marginTop:-0.5, background:COLOR+"99" }} />
           {/* vertical bar */}
-          <div style={{ position:"absolute", left:"50%", top:4, bottom:4, width:1, marginLeft:-0.5, background:CYAN+"99" }} />
+          <div style={{ position:"absolute", left:"50%", top:4, bottom:4, width:1, marginLeft:-0.5, background:COLOR+"99" }} />
         </>
       )}
     </div>
