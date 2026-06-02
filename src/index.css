@@ -81,7 +81,8 @@
     * { cursor: none !important; }
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+  html::-webkit-scrollbar { display: none; }
 
   ::selection {
     background-color: hsl(var(--primary));
