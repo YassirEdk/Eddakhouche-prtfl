@@ -29,7 +29,7 @@ const experiences = [
   {
     company: "MedAfrica Logistics",
     role: "Développeur Odoo",
-    type: "Emploi",
+    type: "Stage",
     period: "Janvier 2026 — Aujourd'hui",
     current: true,
     logo: "/MEDAF-WWE-MOBLOG3.png",
