@@ -4,9 +4,7 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 
-const pageStart = Date.now();
-const MIN_MS    = 1000; // neon E shows for at least this long
-let   revealed  = false;
+let revealed = false;
 
 const doReveal = () => {
   if (revealed) return;
@@ -25,17 +23,14 @@ const doReveal = () => {
   window.dispatchEvent(new Event("site-revealed"));
 };
 
-// Wait for everything (fonts + all page resources), then pad to MIN_MS minimum
+// Reveal as soon as fonts + all page assets are fully loaded — no artificial delay
 Promise.all([
   document.fonts.ready,
   new Promise<void>(r => {
     if (document.readyState === "complete") r();
     else window.addEventListener("load", r as EventListener, { once: true });
   }),
-]).then(() => {
-  const remaining = MIN_MS - (Date.now() - pageStart);
-  setTimeout(doReveal, Math.max(0, remaining));
-});
+]).then(doReveal);
 
-// Absolute safety net — never stuck forever
+// Safety net — never stuck forever
 setTimeout(doReveal, 12_000);
