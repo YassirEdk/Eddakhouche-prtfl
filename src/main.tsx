@@ -20,6 +20,7 @@ const doReveal = () => {
     loader.style.pointerEvents = "none";
     setTimeout(() => loader.remove(), 800);
   }
+  (window as any).__siteRevealed = true;
   window.dispatchEvent(new Event("site-revealed"));
 };
 

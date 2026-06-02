@@ -20,7 +20,11 @@ const useCounter = (target: number, duration = 1600) => {
       };
       raf = requestAnimationFrame(tick);
     };
-    window.addEventListener("site-revealed", onReveal, { once: true });
+    if ((window as any).__siteRevealed) {
+      onReveal();
+    } else {
+      window.addEventListener("site-revealed", onReveal, { once: true });
+    }
     return () => { window.removeEventListener("site-revealed", onReveal); cancelAnimationFrame(raf); };
   }, [target, duration]);
 
