@@ -1,138 +1,113 @@
 import { useEffect, useRef, useState } from "react";
-import { useTheme } from "next-themes";
 
 const isTouchDevice = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(pointer: coarse)").matches;
 
-type CursorMode = "default" | "hover" | "text" | "grab" | "grabbing" | "download";
+type Mode = "dot" | "ring" | "text" | "target";
+
+const CYAN = "#00d4ff";
 
 const CursorInner = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [mode, setMode]       = useState<CursorMode>("default");
+  const [mode, setMode]       = useState<Mode>("dot");
   const [visible, setVisible] = useState(false);
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-  const color  = isDark ? "#ffffff" : "#000000";
 
   useEffect(() => {
-    let mouseX = 0, mouseY = 0;
-    let curX = 0, curY = 0;
-    let rafId: number;
+    let mx = 0, my = 0, cx = 0, cy = 0, raf = 0;
 
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX; my = e.clientY;
       if (!visible) setVisible(true);
     };
 
-    const onMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const grabbing = target.closest("[data-cursor='grabbing']");
-      const grab     = target.closest("[data-cursor='grab']");
-      const text     = target.closest("[data-cursor='text']");
-      const download = target.closest("[data-cursor='download']");
-      const hover    = target.closest("a, button, [role='button'], input, textarea, select");
-
-      if (grabbing)    setMode("grabbing");
-      else if (grab)   setMode("grab");
-      else if (text)   setMode("text");
-      else if (download) setMode("download");
-      else if (hover)  setMode("hover");
-      else             setMode("default");
+    const onOver = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if      (t.closest("[data-cursor='grab'],[data-cursor='grabbing']")) setMode("target");
+      else if (t.closest("[data-cursor='text']"))                          setMode("text");
+      else if (t.closest("a,button,[role='button'],input,textarea,select")) setMode("ring");
+      else                                                                  setMode("dot");
     };
 
-    const onMouseLeave = () => setVisible(false);
-    const onMouseEnter = () => setVisible(true);
-
-    const animate = () => {
-      curX += (mouseX - curX) * 0.12;
-      curY += (mouseY - curY) * 0.12;
+    const tick = () => {
+      cx += (mx - cx) * 0.12;
+      cy += (my - cy) * 0.12;
       if (cursorRef.current)
-        cursorRef.current.style.transform = `translate(${curX}px, ${curY}px)`;
-      rafId = requestAnimationFrame(animate);
+        cursorRef.current.style.transform = `translate(${cx}px,${cy}px)`;
+      raf = requestAnimationFrame(tick);
     };
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseover",  onMouseOver);
-    document.documentElement.addEventListener("mouseleave", onMouseLeave);
-    document.documentElement.addEventListener("mouseenter", onMouseEnter);
-    rafId = requestAnimationFrame(animate);
-
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseover",  onOver);
+    document.documentElement.addEventListener("mouseleave", () => setVisible(false));
+    document.documentElement.addEventListener("mouseenter", () => setVisible(true));
+    raf = requestAnimationFrame(tick);
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseover",  onMouseOver);
-      document.documentElement.removeEventListener("mouseleave", onMouseLeave);
-      document.documentElement.removeEventListener("mouseenter", onMouseEnter);
-      cancelAnimationFrame(rafId);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseover",  onOver);
+      cancelAnimationFrame(raf);
     };
   }, [visible]);
 
-  const styles: Record<CursorMode, React.CSSProperties> = {
-    default: {
-      width: 28, height: 28,
-      marginLeft: -14, marginTop: -14,
-      borderRadius: "50%",
-      background: "transparent",
-      border: `1.5px solid ${color}`,
-    },
-    hover: {
+  /* ── shape styles ── */
+  const base: React.CSSProperties = {
+    position: "fixed", top: 0, left: 0,
+    pointerEvents: "none", zIndex: 9999,
+    transition: "width .18s ease, height .18s ease, margin .18s ease, border-radius .18s ease, opacity .25s ease, box-shadow .18s ease",
+    opacity: visible ? 1 : 0,
+  };
+
+  const shapes: Record<Mode, React.CSSProperties> = {
+    // 1 · small glowing dot
+    dot: {
       width: 10, height: 10,
       marginLeft: -5, marginTop: -5,
       borderRadius: "50%",
-      background: color,
-      border: "none",
+      background: CYAN,
+      boxShadow: `0 0 6px ${CYAN}, 0 0 18px ${CYAN}88`,
     },
-    text: {
-      width: 2, height: 22,
-      marginLeft: -1, marginTop: -11,
-      borderRadius: "2px",
-      background: color,
-      border: "none",
-    },
-    grab: {
+    // 2 · neon ring (pointer hover)
+    ring: {
       width: 36, height: 36,
       marginLeft: -18, marginTop: -18,
       borderRadius: "50%",
       background: "transparent",
-      border: `1.5px dashed ${color}`,
+      border: `2px solid ${CYAN}`,
+      boxShadow: `0 0 8px ${CYAN}88, inset 0 0 8px ${CYAN}22`,
     },
-    grabbing: {
-      width: 18, height: 18,
-      marginLeft: -9, marginTop: -9,
-      borderRadius: "50%",
-      background: color,
-      border: "none",
+    // 3 · text I-beam
+    text: {
+      width: 2, height: 22,
+      marginLeft: -1, marginTop: -11,
+      borderRadius: 2,
+      background: CYAN,
+      boxShadow: `0 0 6px ${CYAN}`,
     },
-    download: {
-      width: 10, height: 10,
-      marginLeft: -5, marginTop: -5,
+    // 4 · crosshair target (cube)
+    target: {
+      width: 32, height: 32,
+      marginLeft: -16, marginTop: -16,
       borderRadius: "50%",
-      background: "#ffffff",
-      border: "none",
+      background: "transparent",
+      border: `1.5px solid ${CYAN}88`,
+      boxShadow: `0 0 10px ${CYAN}44`,
     },
   };
 
-  const showCross = mode === "grab";
+  const isTarget = mode === "target";
 
   return (
-    <div
-      ref={cursorRef}
-      className="fixed top-0 left-0 pointer-events-none z-[9999]"
-      style={{
-        ...styles[mode],
-        mixBlendMode: (isDark || mode === "download") ? "difference" : "normal",
-        opacity: visible ? 1 : 0,
-        position: "fixed",
-        transition:
-          "width 0.2s ease, height 0.2s ease, margin 0.2s ease, border-radius 0.2s ease, background 0.2s ease, border 0.2s ease, opacity 0.3s ease",
-      }}
-    >
-      {showCross && (
-        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ position: "absolute", width: 12, height: 1.5, background: color, borderRadius: 1 }} />
-          <div style={{ position: "absolute", width: 1.5, height: 12, background: color, borderRadius: 1 }} />
-        </div>
+    <div ref={cursorRef} style={{ ...base, ...shapes[mode] }}>
+      {/* crosshair lines for target mode */}
+      {isTarget && (
+        <>
+          {/* center dot */}
+          <div style={{ position:"absolute", top:"50%", left:"50%", width:4, height:4, marginLeft:-2, marginTop:-2, borderRadius:"50%", background:CYAN, boxShadow:`0 0 6px ${CYAN}` }} />
+          {/* horizontal bar */}
+          <div style={{ position:"absolute", top:"50%", left:4, right:4, height:1, marginTop:-0.5, background:CYAN+"99" }} />
+          {/* vertical bar */}
+          <div style={{ position:"absolute", left:"50%", top:4, bottom:4, width:1, marginLeft:-0.5, background:CYAN+"99" }} />
+        </>
       )}
     </div>
   );
