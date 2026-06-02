@@ -2,35 +2,29 @@ import { Mail, Phone, Linkedin, Github, Download, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Cube3D } from "@/components/Cube3D";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
-const useCounter = (target: number, duration = 1800) => {
+const useCounter = (target: number, duration = 1600) => {
   const [count, setCount] = useState(0);
-  const ref     = useRef<HTMLDivElement>(null);
-  const started = useRef(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !started.current) {
-        started.current = true;
-        const start = performance.now();
-        const tick  = (now: number) => {
-          const p = Math.min((now - start) / duration, 1);
-          setCount(Math.floor(easeOut(p) * target));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      }
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
+    let raf = 0;
+    const onReveal = () => {
+      const startTime = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min((now - startTime) / duration, 1);
+        setCount(Math.floor(easeOut(p) * target));
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    };
+    window.addEventListener("site-revealed", onReveal, { once: true });
+    return () => { window.removeEventListener("site-revealed", onReveal); cancelAnimationFrame(raf); };
   }, [target, duration]);
 
-  return { count, ref };
+  return count;
 };
 
 const stats = [
@@ -40,9 +34,9 @@ const stats = [
 ];
 
 const StatCard = ({ stat }: { stat: typeof stats[0] }) => {
-  const { count, ref } = useCounter(stat.target);
+  const count = useCounter(stat.target);
   return (
-    <div ref={ref} className="flex flex-col items-center gap-0.5">
+    <div className="flex flex-col items-center gap-0.5">
       <span className="text-2xl sm:text-3xl font-black text-primary tabular-nums leading-none">
         {count}{stat.suffix}
       </span>

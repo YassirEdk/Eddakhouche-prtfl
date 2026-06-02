@@ -24,6 +24,8 @@ const doReveal = () => {
     loader.style.pointerEvents = "none";
     setTimeout(() => loader.remove(), 800);
   }
+  // Tell React components the site is now visible so they can start their animations
+  window.dispatchEvent(new Event("site-revealed"));
 };
 
 const maybeReveal = () => {
