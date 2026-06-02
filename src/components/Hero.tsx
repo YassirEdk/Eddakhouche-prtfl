@@ -15,7 +15,7 @@ const useCounter = (target: number, duration = 1600) => {
       const startTime = performance.now();
       const tick = (now: number) => {
         const p = Math.min((now - startTime) / duration, 1);
-        setCount(Math.floor(easeOut(p) * target));
+        setCount(Math.round(easeOut(p) * target));
         if (p < 1) raf = requestAnimationFrame(tick);
       };
       raf = requestAnimationFrame(tick);
