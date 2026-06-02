@@ -1,0 +1,13 @@
+{
+  "name": "Yassir Eddakhouche — Portfolio",
+  "short_name": "Eddakhouche",
+  "description": "Portfolio de Yassir Eddakhouche, Ingénieur Full Stack",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060d1f",
+  "theme_color": "#060d1f",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
