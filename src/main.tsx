@@ -5,7 +5,7 @@ import "./index.css";
 createRoot(document.getElementById("root")!).render(<App />);
 
 const pageStart = Date.now();
-const MIN_MS    = 8000; // neon E shows for at least this long
+const MIN_MS    = 1000; // neon E shows for at least this long
 let   revealed  = false;
 
 const doReveal = () => {
