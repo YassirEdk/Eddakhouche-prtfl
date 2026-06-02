@@ -29,6 +29,19 @@ export const Cube3D = ({ scale = 1 }: { scale?: number }) => {
         `rotateX(${rotation.current.x}deg) rotateY(${rotation.current.y}deg)`;
   }, []);
 
+  // Prevent browser from treating cube drag as a scroll (which hides the nav bar)
+  useEffect(() => {
+    const el = sceneRef.current;
+    if (!el) return;
+    const block = (e: TouchEvent) => e.preventDefault();
+    el.addEventListener("touchstart", block, { passive: false });
+    el.addEventListener("touchmove",  block, { passive: false });
+    return () => {
+      el.removeEventListener("touchstart", block);
+      el.removeEventListener("touchmove",  block);
+    };
+  }, []);
+
   useEffect(() => {
     let prevTime: number | null = null;
     const tick = (time: number) => {
