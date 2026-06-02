@@ -62,7 +62,7 @@ export const Hero = () => {
         <div className="flex flex-col xl:flex-row items-center justify-center gap-8 xl:gap-[80px] 2xl:gap-[220px]">
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col items-center text-center gap-5 w-full max-w-xl">
+          <div className="flex flex-col items-center text-center gap-5 w-full max-w-xl mx-auto xl:mx-0">
 
             {/* Eyebrow */}
             <span className="section-eyebrow">Portfolio — Ingénieur Full Stack</span>
