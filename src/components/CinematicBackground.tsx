@@ -51,36 +51,29 @@ export const CinematicBackground = () => {
       className="fixed inset-0 -z-10 overflow-hidden pointer-events-none transition-colors duration-700"
       style={{ background: isDark ? "hsl(225,55%,4%)" : "hsl(210,30%,97%)" }}
     >
-      {/* Blob 1 — top-left, slow float */}
-      <div
-        className="absolute top-[-15%] left-[-10%] w-[65%] h-[65%] rounded-full blur-[160px]
-                   animate-float-1 motion-reduce:animate-none"
-        style={{
-          background: theme.c1,
-          transition: "background 1.2s ease",
-          willChange: "transform",
-        }}
-      />
-      {/* Blob 2 — bottom-right, medium float */}
-      <div
-        className="absolute bottom-[-20%] right-[-10%] w-[55%] h-[55%] rounded-full blur-[140px]
-                   animate-float-2 motion-reduce:animate-none"
-        style={{
-          background: theme.c2,
-          transition: "background 1.4s ease",
-          willChange: "transform",
-        }}
-      />
-      {/* Blob 3 — center, slow drift + glow pulse */}
-      <div
-        className="absolute top-[35%] left-[30%] w-[40%] h-[40%] rounded-full blur-[120px]
-                   animate-float-3 animate-glow-pulse motion-reduce:animate-none"
-        style={{
-          background: theme.c3,
-          transition: "background 1.6s ease",
-          willChange: "transform",
-        }}
-      />
+      {/* Blob 1 — top-left, slow float. Outer div animates; inner div blurs (keeps both working on mobile). */}
+      <div className="absolute top-[-15%] left-[-10%] w-[65%] h-[65%] animate-float-1 motion-reduce:animate-none">
+        <div
+          className="w-full h-full rounded-full blur-[160px]"
+          style={{ background: theme.c1, transition: "background 1.2s ease" }}
+        />
+      </div>
+
+      {/* Blob 2 — bottom-right */}
+      <div className="absolute bottom-[-20%] right-[-10%] w-[55%] h-[55%] animate-float-2 motion-reduce:animate-none">
+        <div
+          className="w-full h-full rounded-full blur-[140px]"
+          style={{ background: theme.c2, transition: "background 1.4s ease" }}
+        />
+      </div>
+
+      {/* Blob 3 — center, slower drift */}
+      <div className="absolute top-[35%] left-[30%] w-[40%] h-[40%] animate-float-3 motion-reduce:animate-none">
+        <div
+          className="w-full h-full rounded-full blur-[120px]"
+          style={{ background: theme.c3, transition: "background 1.6s ease" }}
+        />
+      </div>
       {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 opacity-[0.025]"
