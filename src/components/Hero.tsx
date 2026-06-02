@@ -90,9 +90,11 @@ export const Hero = () => {
               <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-transparent to-primary/50" />
             </div>
 
-            {/* Cube — mobile only (visible right after name) */}
-            <div className="xl:hidden flex justify-center w-full scale-[0.7] -mt-[75px] -mb-[75px]" style={{ transformOrigin: "center" }}>
-              <Cube3D />
+            {/* Cube — mobile only. Clip to visual size so it doesn't bleed into layout */}
+            <div className="xl:hidden flex justify-center w-full" style={{ height: 260, overflow: "hidden" }}>
+              <div style={{ transform: "scale(0.52)", transformOrigin: "top center" }}>
+                <Cube3D />
+              </div>
             </div>
 
             {/* Photo */}

@@ -36,36 +36,8 @@
   </head>
 
   <body>
-    <!-- Neon E loader — looping draw animation until site is ready -->
-    <div id="loader" style="position:fixed;inset:0;z-index:99999;background:hsl(225,55%,4%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity 0.6s ease;">
-
-      <svg viewBox="0 0 70 90" width="110" height="140" fill="none" stroke="#00d4ff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" style="animation:neonGlow 1.8s ease-in-out infinite;">
-        <!-- Vertical bar  length=70 -->
-        <line x1="15" y1="10" x2="15" y2="80" stroke-dasharray="70" stroke-dashoffset="70" style="animation:lineV 3s ease-in-out infinite;"/>
-        <!-- Top bar       length=45 -->
-        <line x1="15" y1="10" x2="60" y2="10" stroke-dasharray="45" stroke-dashoffset="45" style="animation:lineT 3s ease-in-out infinite;"/>
-        <!-- Middle bar    length=35 -->
-        <line x1="15" y1="45" x2="50" y2="45" stroke-dasharray="35" stroke-dashoffset="35" style="animation:lineM 3s ease-in-out infinite;"/>
-        <!-- Bottom bar    length=45 -->
-        <line x1="15" y1="80" x2="60" y2="80" stroke-dasharray="45" stroke-dashoffset="45" style="animation:lineB 3s ease-in-out infinite;"/>
-      </svg>
-
-      <style>
-        /* Draw sequentially → hold → erase in reverse → repeat */
-        @keyframes lineV { 0%{stroke-dashoffset:70} 15%{stroke-dashoffset:0} 88%{stroke-dashoffset:0} 100%{stroke-dashoffset:70} }
-        @keyframes lineT { 0%,17%{stroke-dashoffset:45} 27%{stroke-dashoffset:0} 83%{stroke-dashoffset:0} 93%{stroke-dashoffset:45} 100%{stroke-dashoffset:45} }
-        @keyframes lineM { 0%,30%{stroke-dashoffset:35} 38%{stroke-dashoffset:0} 79%{stroke-dashoffset:0} 88%{stroke-dashoffset:35} 100%{stroke-dashoffset:35} }
-        @keyframes lineB { 0%,38%{stroke-dashoffset:45} 48%{stroke-dashoffset:0} 76%{stroke-dashoffset:0} 84%{stroke-dashoffset:45} 100%{stroke-dashoffset:45} }
-        @keyframes neonGlow {
-          0%,100% { filter:drop-shadow(0 0 4px #00d4ff) drop-shadow(0 0 14px #00d4ff); }
-          50%     { filter:drop-shadow(0 0 8px #00d4ff) drop-shadow(0 0 28px #00d4ff) drop-shadow(0 0 50px #00d4ff88); }
-        }
-      </style>
-
-      <span style="font-family:'Space Grotesk',monospace;font-size:0.6rem;font-weight:600;letter-spacing:0.35em;color:rgba(0,212,255,0.4);text-transform:uppercase;">
-        Chargement...
-      </span>
-    </div>
+    <!-- Blank loader — just the dark background until React is fully ready -->
+    <div id="loader" style="position:fixed;inset:0;z-index:99999;background:hsl(225,55%,4%);transition:opacity 0.6s ease;"></div>
 
     <div id="root" style="visibility:hidden;opacity:0;transition:opacity 0.5s ease;"></div>
     <script type="module" src="/src/main.tsx"></script>

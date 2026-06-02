@@ -4,10 +4,14 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 
-let windowLoaded  = false;
-let reactPainted  = false;
+let windowLoaded = false;
+let reactPainted = false;
+let revealed     = false;
 
 const doReveal = () => {
+  if (revealed) return;
+  revealed = true;
+  clearTimeout(safetyTimer);
   const root   = document.getElementById("root");
   const loader = document.getElementById("loader");
   if (root)   { root.style.visibility = "visible"; root.style.opacity = "1"; }
@@ -18,14 +22,16 @@ const doReveal = () => {
   }
 };
 
-// Called by Index.tsx after React has actually painted the page
-(window as any).__signalReady = () => {
-  reactPainted = true;
-  if (windowLoaded) doReveal();
+const maybeReveal = () => {
+  if (!windowLoaded || !reactPainted) return;
+  // 900 ms settle buffer: lets CSS 3D, counter observers, and lazy chunks finish
+  setTimeout(doReveal, 900);
 };
 
-// Safety valve — reveal after 6 s regardless, so the page is never stuck forever
-const safetyTimer = setTimeout(() => doReveal(), 6000);
+(window as any).__signalReady = () => { reactPainted = true; maybeReveal(); };
+
+// Safety valve — never stuck forever
+const safetyTimer = setTimeout(doReveal, 10_000);
 
 Promise.all([
   document.fonts.ready,
@@ -33,7 +39,4 @@ Promise.all([
     if (document.readyState === "complete") r();
     else window.addEventListener("load", () => r(), { once: true });
   }),
-]).then(() => {
-  windowLoaded = true;
-  if (reactPainted) { clearTimeout(safetyTimer); doReveal(); }
-});
+]).then(() => { windowLoaded = true; maybeReveal(); });
