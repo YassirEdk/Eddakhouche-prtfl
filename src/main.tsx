@@ -16,7 +16,6 @@ const doReveal = () => {
   if (root) {
     root.style.visibility = "visible";
     root.style.opacity    = "1";
-    root.style.transform  = "translateY(0)";
   }
   if (loader) {
     loader.style.opacity       = "0";
