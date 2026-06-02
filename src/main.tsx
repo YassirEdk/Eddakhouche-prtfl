@@ -4,34 +4,36 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 
-const revealSite = () => {
-  // Wait for fonts + 2 paint frames + 600ms buffer so 3D and all CSS fully initialize
-  Promise.all([
-    document.fonts.ready,
-    new Promise(r => setTimeout(r, 600)),
-  ]).then(() => {
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      const root   = document.getElementById("root");
-      const loader = document.getElementById("loader");
+let windowLoaded  = false;
+let reactPainted  = false;
 
-      // Show site
-      if (root) {
-        root.style.visibility = "visible";
-        root.style.opacity    = "1";
-      }
-
-      // Fade out loader
-      if (loader) {
-        loader.style.opacity      = "0";
-        loader.style.pointerEvents = "none";
-        setTimeout(() => loader.remove(), 600);
-      }
-    }));
-  });
+const doReveal = () => {
+  const root   = document.getElementById("root");
+  const loader = document.getElementById("loader");
+  if (root)   { root.style.visibility = "visible"; root.style.opacity = "1"; }
+  if (loader) {
+    loader.style.opacity       = "0";
+    loader.style.pointerEvents = "none";
+    setTimeout(() => loader.remove(), 600);
+  }
 };
 
-if (document.readyState === "complete") {
-  revealSite();
-} else {
-  window.addEventListener("load", revealSite);
-}
+// Called by Index.tsx after React has actually painted the page
+(window as any).__signalReady = () => {
+  reactPainted = true;
+  if (windowLoaded) doReveal();
+};
+
+// Safety valve — reveal after 6 s regardless, so the page is never stuck forever
+const safetyTimer = setTimeout(() => doReveal(), 6000);
+
+Promise.all([
+  document.fonts.ready,
+  new Promise<void>(r => {
+    if (document.readyState === "complete") r();
+    else window.addEventListener("load", () => r(), { once: true });
+  }),
+]).then(() => {
+  windowLoaded = true;
+  if (reactPainted) { clearTimeout(safetyTimer); doReveal(); }
+});
