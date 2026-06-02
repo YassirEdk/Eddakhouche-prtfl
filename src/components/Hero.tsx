@@ -51,7 +51,7 @@ export const Hero = () => {
   const [burst, setBurst] = useState(0);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-20 pt-24">
+    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-20 pt-24 overflow-x-hidden">
       {/* Decorative edge lines */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-primary/10 to-transparent" />
@@ -84,10 +84,12 @@ export const Hero = () => {
               <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-transparent to-primary/50" />
             </div>
 
-            {/* Cube — mobile only. Clip to visual size so it doesn't bleed into layout */}
-            <div className="xl:hidden flex justify-center w-full" style={{ height: 260, overflow: "hidden" }}>
-              <div style={{ transform: "scale(0.52)", transformOrigin: "top center" }}>
-                <Cube3D />
+            {/* Cube — mobile only */}
+            <div className="xl:hidden w-full overflow-hidden" style={{ height: 260 }}>
+              <div className="flex justify-center w-full h-full items-start">
+                <div style={{ transform: "scale(0.52)", transformOrigin: "top center", flexShrink: 0 }}>
+                  <Cube3D />
+                </div>
               </div>
             </div>
 
