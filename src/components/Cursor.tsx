@@ -4,9 +4,9 @@ const isTouchDevice = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(pointer: coarse)").matches;
 
-type Mode = "dot" | "ring" | "text" | "target";
+type Mode = "dot" | "text" | "target";
 
-const CYAN = "#00d4ff";
+const CYAN = "#ffffff";
 
 const CursorInner = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,6 @@ const CursorInner = () => {
       const t = e.target as HTMLElement;
       if      (t.closest("[data-cursor='grab'],[data-cursor='grabbing']")) setMode("target");
       else if (t.closest("[data-cursor='text']"))                          setMode("text");
-      else if (t.closest("a,button,[role='button'],input,textarea,select")) setMode("ring");
       else                                                                  setMode("dot");
     };
 
@@ -66,16 +65,7 @@ const CursorInner = () => {
       background: CYAN,
       boxShadow: `0 0 6px ${CYAN}, 0 0 18px ${CYAN}88`,
     },
-    // 2 · neon ring (pointer hover)
-    ring: {
-      width: 36, height: 36,
-      marginLeft: -18, marginTop: -18,
-      borderRadius: "50%",
-      background: "transparent",
-      border: `2px solid ${CYAN}`,
-      boxShadow: `0 0 8px ${CYAN}88, inset 0 0 8px ${CYAN}22`,
-    },
-    // 3 · text I-beam
+    // 2 · text I-beam
     text: {
       width: 2, height: 22,
       marginLeft: -1, marginTop: -11,
