@@ -21,8 +21,11 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" />
 
-    <!-- Prevent white flash: apply dark class and background before React loads -->
-    <style>html { background: hsl(225,55%,4%); }</style>
+    <!-- Prevent flash before React loads — matches both themes -->
+    <style>
+      html       { background: hsl(225,55%,4%); }
+      html.light { background: hsl(210,30%,97%); }
+    </style>
     <script>
       (function () {
         try {
