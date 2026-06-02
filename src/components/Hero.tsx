@@ -84,13 +84,9 @@ export const Hero = () => {
               <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-transparent to-primary/50" />
             </div>
 
-            {/* Cube — mobile only */}
-            <div className="xl:hidden w-full overflow-hidden" style={{ height: 260 }}>
-              <div className="flex justify-center w-full h-full items-start">
-                <div style={{ transform: "scale(0.52)", transformOrigin: "top center", flexShrink: 0 }}>
-                  <Cube3D />
-                </div>
-              </div>
+            {/* Cube — mobile only, scale=0.52 computes real smaller sizes (no CSS transform = no 3D flattening) */}
+            <div className="xl:hidden flex justify-center w-full">
+              <Cube3D scale={0.52} />
             </div>
 
             {/* Photo */}

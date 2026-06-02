@@ -1,19 +1,21 @@
 import { useRef, useEffect, useCallback } from "react";
 
-const SIZE  = 250;   // cube face size
-const HALF  = SIZE / 2;
-const SCENE = 500;   // scene container – large enough to contain any rotation
-
-const faces = [
-  { transform: `rotateY(0deg)   translateZ(${HALF}px)`, label: "React",       logo: "/logos/react.svg",      color: "#61DAFB" },
-  { transform: `rotateY(180deg) translateZ(${HALF}px)`, label: "Odoo",        logo: "/logos/odoo.svg",       color: "#A855F7" },
-  { transform: `rotateY(90deg)  translateZ(${HALF}px)`, label: "Spring Boot", logo: "/logos/spring.svg",     color: "#6DB33F" },
-  { transform: `rotateY(-90deg) translateZ(${HALF}px)`, label: "Python",      logo: "/logos/python.svg",     color: "#FFD343" },
-  { transform: `rotateX(90deg)  translateZ(${HALF}px)`, label: "PostgreSQL",  logo: "/logos/postgresql.svg", color: "#336791" },
-  { transform: `rotateX(-90deg) translateZ(${HALF}px)`, label: "JavaScript",  logo: "/logos/javascript.svg", color: "#F7DF1E" },
+const FACES = [
+  { rotY:   0, rotX:  0, label: "React",       logo: "/logos/react.svg",      color: "#61DAFB" },
+  { rotY: 180, rotX:  0, label: "Odoo",         logo: "/logos/odoo.svg",       color: "#A855F7" },
+  { rotY:  90, rotX:  0, label: "Spring Boot",  logo: "/logos/spring.svg",     color: "#6DB33F" },
+  { rotY: -90, rotX:  0, label: "Python",       logo: "/logos/python.svg",     color: "#FFD343" },
+  { rotY:   0, rotX: 90, label: "PostgreSQL",   logo: "/logos/postgresql.svg", color: "#336791" },
+  { rotY:   0, rotX:-90, label: "JavaScript",   logo: "/logos/javascript.svg", color: "#F7DF1E" },
 ];
 
-export const Cube3D = () => {
+export const Cube3D = ({ scale = 1 }: { scale?: number }) => {
+  const SIZE  = Math.round(250 * scale);
+  const HALF  = SIZE / 2;
+  const SCENE = Math.round(500 * scale);
+  const PERSP = Math.round(900 * scale);
+  const LOGO  = Math.round(70  * scale);
+
   const sceneRef   = useRef<HTMLDivElement>(null);
   const cubeRef    = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
@@ -22,10 +24,9 @@ export const Cube3D = () => {
   const rafRef     = useRef<number>(0);
 
   const applyTransform = useCallback(() => {
-    if (cubeRef.current) {
+    if (cubeRef.current)
       cubeRef.current.style.transform =
         `rotateX(${rotation.current.x}deg) rotateY(${rotation.current.y}deg)`;
-    }
   }, []);
 
   useEffect(() => {
@@ -52,10 +53,7 @@ export const Cube3D = () => {
     lastPos.current = { x: e.clientX, y: e.clientY };
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     document.body.style.overflow = "hidden";
-    if (sceneRef.current) {
-      sceneRef.current.style.cursor = "grabbing";
-      sceneRef.current.setAttribute("data-cursor", "grabbing");
-    }
+    if (sceneRef.current) sceneRef.current.setAttribute("data-cursor", "grabbing");
   };
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -72,95 +70,79 @@ export const Cube3D = () => {
   const onPointerUp = () => {
     isDragging.current = false;
     document.body.style.overflow = "";
-    if (sceneRef.current) {
-      sceneRef.current.style.cursor = "grab";
-      sceneRef.current.setAttribute("data-cursor", "grab");
-    }
+    if (sceneRef.current) sceneRef.current.setAttribute("data-cursor", "grab");
   };
 
   return (
     <div className="flex flex-col items-center flex-shrink-0 self-center select-none">
-
-      {/* Label above — safely outside the clipped scene */}
       <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3">
         Stack Technique
       </p>
 
-      {/* Scene: clips 3D overflow so faces never escape onto the labels */}
       <div
         ref={sceneRef}
         data-cursor="grab"
         style={{
-          width: SCENE,
-          height: SCENE,
+          width: SCENE, height: SCENE,
           overflow: "hidden",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          perspective: "900px",
-          cursor: "grab",
-          touchAction: "none",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          perspective: `${PERSP}px`,
+          cursor: "grab", touchAction: "none",
         }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
       >
-        {/* Cube */}
         <div
           ref={cubeRef}
           style={{
-            width: SIZE,
-            height: SIZE,
+            width: SIZE, height: SIZE,
             position: "relative",
             transformStyle: "preserve-3d",
             transform: "rotateX(15deg) rotateY(0deg)",
             flexShrink: 0,
           }}
         >
-          {faces.map((face, i) => (
-            <div
-              key={i}
-              style={{
-                position: "absolute",
-                width: SIZE,
-                height: SIZE,
-                transform: face.transform,
-                border: `1.5px solid ${face.color}55`,
-                background: `linear-gradient(135deg, ${face.color}18, ${face.color}06)`,
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                borderRadius: "16px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: `inset 0 0 40px ${face.color}10, 0 0 25px ${face.color}18`,
-              }}
-            >
-              <img
-                src={face.logo}
-                alt={face.label}
-                draggable={false}
-                style={{ width: 70, height: 70, objectFit: "contain", pointerEvents: "none" }}
-              />
-              <span
+          {FACES.map((face, i) => {
+            const t = face.rotX !== 0
+              ? `rotateX(${face.rotX}deg) translateZ(${HALF}px)`
+              : `rotateY(${face.rotY}deg) translateZ(${HALF}px)`;
+            return (
+              <div
+                key={i}
                 style={{
-                  color: face.color,
-                  fontWeight: 700,
-                  fontSize: "13px",
-                  marginTop: "12px",
-                  letterSpacing: "0.07em",
-                  textShadow: `0 0 14px ${face.color}80`,
+                  position: "absolute",
+                  width: SIZE, height: SIZE,
+                  transform: t,
+                  border: `1.5px solid ${face.color}55`,
+                  background: `linear-gradient(135deg, ${face.color}18, ${face.color}06)`,
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                  borderRadius: Math.round(16 * scale),
+                  display: "flex", flexDirection: "column",
+                  alignItems: "center", justifyContent: "center",
+                  boxShadow: `inset 0 0 40px ${face.color}10, 0 0 25px ${face.color}18`,
                 }}
               >
-                {face.label}
-              </span>
-            </div>
-          ))}
+                <img
+                  src={face.logo} alt={face.label} draggable={false}
+                  style={{ width: LOGO, height: LOGO, objectFit: "contain", pointerEvents: "none" }}
+                />
+                <span style={{
+                  color: face.color, fontWeight: 700,
+                  fontSize: Math.max(10, Math.round(13 * scale)) + "px",
+                  marginTop: Math.round(12 * scale),
+                  letterSpacing: "0.07em",
+                  textShadow: `0 0 14px ${face.color}80`,
+                }}>
+                  {face.label}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Label below — safely outside the clipped scene */}
       <p className="text-xs text-muted-foreground/50 tracking-wide mt-3">
         ↔ Faites glisser pour tourner
       </p>
