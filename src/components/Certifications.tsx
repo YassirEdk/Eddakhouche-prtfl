@@ -42,7 +42,7 @@ export const Certifications = () => (
       </div>
       <div className="grid md:grid-cols-2 gap-5">
         {certifications.map((cert, index) => (
-          <CertCard key={index} cert={cert} index={index} />
+          <CertCard key={cert.title} cert={cert} index={index} />
         ))}
       </div>
     </div>

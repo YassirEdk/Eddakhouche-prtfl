@@ -23,9 +23,9 @@ const SkillCard = ({ category, index }: { category: typeof skillCategories[0]; i
         <h3 className="text-sm font-bold text-primary uppercase tracking-wider">{category.title}</h3>
       </div>
       <div className="flex flex-wrap gap-2">
-        {category.skills.map((skill, i) => (
+        {category.skills.map((skill) => (
           <Badge
-            key={i}
+            key={skill}
             variant="secondary"
             className="text-xs bg-secondary/80 text-foreground/80 border border-border/50 hover:border-primary/50 hover:text-primary hover:[text-shadow:0_0_12px_hsl(var(--primary)/0.8)] transition-all cursor-pointer"
           >
@@ -47,7 +47,7 @@ export const Skills = () => (
       </div>
       <div className="grid md:grid-cols-2 gap-5">
         {skillCategories.map((category, index) => (
-          <SkillCard key={index} category={category} index={index} />
+          <SkillCard key={category.title} category={category} index={index} />
         ))}
       </div>
     </div>

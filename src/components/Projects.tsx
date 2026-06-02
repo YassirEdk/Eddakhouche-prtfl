@@ -86,8 +86,8 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         <div className="px-5 py-4 flex flex-col gap-4">
           <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
           <div className="flex flex-wrap gap-1.5">
-            {project.technologies.map((tech, i) => (
-              <span key={i} className="text-xs font-medium px-2.5 py-0.5 rounded-full"
+            {project.technologies.map((tech) => (
+              <span key={tech} className="text-xs font-medium px-2.5 py-0.5 rounded-full"
                 style={{ background: `${project.accent}12`, color: project.accent, border: `1px solid ${project.accent}28` }}>
                 {tech}
               </span>
@@ -112,7 +112,7 @@ export const Projects = () => (
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {projects.map((project, index) => (
-          <ProjectCard key={index} project={project} index={index} />
+          <ProjectCard key={project.title} project={project} index={index} />
         ))}
       </div>
     </div>

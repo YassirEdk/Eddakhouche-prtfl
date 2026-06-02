@@ -29,6 +29,7 @@ export const CinematicBackground = () => {
   const [theme, setTheme] = useState(THEMES.hero);
 
   useEffect(() => {
+    let ticking = false;
     const update = () => {
       const mid = window.innerHeight * 0.45;
       for (const id of [...SECTIONS].reverse()) {
@@ -40,10 +41,16 @@ export const CinematicBackground = () => {
       }
       setTheme(THEMES.hero);
     };
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => { update(); ticking = false; });
+        ticking = true;
+      }
+    };
 
-    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     update();
-    return () => window.removeEventListener("scroll", update);
+    return () => window.removeEventListener("scroll", onScroll);
   }, [THEMES]);
 
   return (

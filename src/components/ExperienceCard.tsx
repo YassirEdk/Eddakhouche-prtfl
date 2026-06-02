@@ -171,9 +171,9 @@ const ExperienceItem = ({ exp, index }: { exp: typeof experiences[0]; index: num
         </div>
         <div className="mb-4">{exp.description}</div>
         <div className="flex flex-wrap gap-1.5">
-          {exp.technologies.map((tech, i) => (
+          {exp.technologies.map((tech) => (
             <span
-              key={i}
+              key={tech}
               className="text-xs px-2.5 py-0.5 rounded-full bg-primary/8 text-primary/80 border border-primary/15 hover:border-primary/40 hover:text-primary transition-all"
             >
               {tech}
@@ -195,7 +195,7 @@ export const Experience = () => (
       </div>
       <div>
         {experiences.map((exp, index) => (
-          <ExperienceItem key={index} exp={exp} index={index} />
+          <ExperienceItem key={exp.company} exp={exp} index={index} />
         ))}
       </div>
     </div>
