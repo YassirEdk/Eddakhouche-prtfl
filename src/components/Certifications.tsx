@@ -23,7 +23,7 @@ const CertCard = ({ cert, index }: { cert: typeof certifications[0]; index: numb
         <h3 className="font-bold text-foreground text-base group-hover:text-primary transition-colors mb-1">{cert.title}</h3>
         <p className="text-xs text-muted-foreground uppercase tracking-wider">{cert.issuer}</p>
       </div>
-      <Button variant="outline" size="sm" asChild className="gap-2 text-xs border-border/50 text-muted-foreground hover:border-primary/50 hover:text-primary">
+      <Button variant="outline" size="sm" asChild className="gap-2 text-xs border-border/50 text-muted-foreground hover:bg-primary hover:border-primary hover:text-black dark:hover:text-white transition-all">
         <a href={cert.link} target="_blank" rel="noopener noreferrer">
           Voir la certification <ExternalLink className="w-3 h-3" />
         </a>
