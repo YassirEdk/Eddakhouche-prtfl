@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 
 const FACES = [
   { rotY:   0, rotX:  0, label: "React",       logo: "/logos/react.svg",      color: "#61DAFB" },
@@ -23,6 +23,17 @@ export const Cube3D = ({ scale = 1 }: { scale?: number }) => {
   const rotation   = useRef({ x: 15, y: 0 });
   const rafRef     = useRef<number>(0);
 
+  // On touch devices, drop the per-frame backdrop blur (very expensive on
+  // mobile GPUs) and lean on a more opaque gradient instead.
+  const [lite, setLite] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: coarse)");
+    const update = () => setLite(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   const applyTransform = useCallback(() => {
     if (cubeRef.current)
       cubeRef.current.style.transform =
@@ -43,7 +54,12 @@ export const Cube3D = ({ scale = 1 }: { scale?: number }) => {
   }, []);
 
   useEffect(() => {
+    // Honour reduced-motion: no auto-spin (dragging still works).
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     let prevTime: number | null = null;
+    let running = false;
+
     const tick = (time: number) => {
       if (!isDragging.current) {
         if (prevTime !== null) {
@@ -57,8 +73,41 @@ export const Cube3D = ({ scale = 1 }: { scale?: number }) => {
       }
       rafRef.current = requestAnimationFrame(tick);
     };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
+
+    const start = () => {
+      if (running || document.hidden) return;
+      running = true;
+      prevTime = null;
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(rafRef.current);
+    };
+
+    // Only animate while the cube is actually on screen.
+    let onScreen = true;
+    const el = sceneRef.current;
+    const io = el
+      ? new IntersectionObserver(([entry]) => {
+          onScreen = entry.isIntersecting;
+          onScreen ? start() : stop();
+        })
+      : null;
+    if (io && el) io.observe(el);
+    else start();
+
+    const onVisibility = () => {
+      if (document.hidden) stop();
+      else if (onScreen) start();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      stop();
+      io?.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, [applyTransform]);
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -128,13 +177,17 @@ export const Cube3D = ({ scale = 1 }: { scale?: number }) => {
                   width: SIZE, height: SIZE,
                   transform: t,
                   border: `1.5px solid ${face.color}55`,
-                  background: `linear-gradient(135deg, ${face.color}18, ${face.color}06)`,
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
+                  background: lite
+                    ? `linear-gradient(135deg, ${face.color}30, ${face.color}14)`
+                    : `linear-gradient(135deg, ${face.color}18, ${face.color}06)`,
+                  backdropFilter: lite ? undefined : "blur(10px)",
+                  WebkitBackdropFilter: lite ? undefined : "blur(10px)",
                   borderRadius: Math.round(16 * scale),
                   display: "flex", flexDirection: "column",
                   alignItems: "center", justifyContent: "center",
-                  boxShadow: `inset 0 0 40px ${face.color}10, 0 0 25px ${face.color}18`,
+                  boxShadow: lite
+                    ? `0 0 18px ${face.color}14`
+                    : `inset 0 0 40px ${face.color}10, 0 0 25px ${face.color}18`,
                 }}
               >
                 <img
