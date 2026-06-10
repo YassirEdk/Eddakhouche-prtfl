@@ -23,22 +23,32 @@ const doReveal = () => {
   (window as any).__siteRevealed = true;
   window.dispatchEvent(new Event("site-revealed"));
 
-  // Welcome white flash — a quick bright burst that fades to reveal the site.
+  // Welcome flash — a white burst that grows from the center to the edges, then fades.
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!reduceMotion) {
-    const flash = document.createElement("div");
-    flash.style.cssText =
-      "position:fixed;inset:0;z-index:100000;background:#ffffff;pointer-events:none;will-change:opacity;";
-    document.body.appendChild(flash);
-    const anim = flash.animate(
+    const wrap = document.createElement("div");
+    wrap.style.cssText =
+      "position:fixed;inset:0;z-index:100000;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden;";
+
+    const burst = document.createElement("div");
+    // A circle large enough to cover the whole viewport (incl. corners) when scaled.
+    burst.style.cssText =
+      "width:230vmax;height:230vmax;border-radius:50%;" +
+      "background:radial-gradient(circle, #ffffff 0%, #ffffff 55%, rgba(255,255,255,0) 75%);" +
+      "transform:scale(0);will-change:transform,opacity;";
+
+    wrap.appendChild(burst);
+    document.body.appendChild(wrap);
+
+    const anim = burst.animate(
       [
-        { opacity: 0.95 },
-        { opacity: 0.95, offset: 0.12 },
-        { opacity: 0 },
+        { transform: "scale(0)",   opacity: 1, offset: 0 },
+        { transform: "scale(1)",   opacity: 1, offset: 0.55 },
+        { transform: "scale(1.1)", opacity: 0, offset: 1 },
       ],
-      { duration: 700, easing: "ease-out" }
+      { duration: 900, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
     );
-    anim.onfinish = () => flash.remove();
+    anim.onfinish = () => wrap.remove();
   }
 };
 
