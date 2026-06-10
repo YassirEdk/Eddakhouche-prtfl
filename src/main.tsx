@@ -43,10 +43,10 @@ const doReveal = () => {
     const anim = burst.animate(
       [
         { transform: "scale(0)",   opacity: 1, offset: 0 },
-        { transform: "scale(1)",   opacity: 1, offset: 0.55 },
+        { transform: "scale(1)",   opacity: 1, offset: 0.6 },
         { transform: "scale(1.1)", opacity: 0, offset: 1 },
       ],
-      { duration: 900, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
+      { duration: 1500, easing: "cubic-bezier(0.33, 0, 0.2, 1)" }
     );
     anim.onfinish = () => wrap.remove();
   }
