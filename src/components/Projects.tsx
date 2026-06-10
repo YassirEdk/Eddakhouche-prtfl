@@ -94,7 +94,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               src={project.image}
               alt={project.title}
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              draggable={false}
+              className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 select-none"
             />
           ) : (
             <>
