@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c1322"/><stop offset="1" stop-color="#080d18"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(440 24) rotate(135) scale(240)">
+      <stop stop-color="#f97316" stop-opacity="0.28"/><stop offset="1" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="480" height="300" fill="url(#bg)"/>
+  <rect width="480" height="300" fill="url(#glow)"/>
+  <rect x="20" y="18" width="440" height="264" rx="14" fill="#0f1828" stroke="#f97316" stroke-opacity="0.25"/>
+  <circle cx="40" cy="38" r="4" fill="#f97316"/><circle cx="54" cy="38" r="4" fill="#f97316" fill-opacity="0.4"/><circle cx="68" cy="38" r="4" fill="#f97316" fill-opacity="0.4"/>
+  <rect x="334" y="32" width="106" height="12" rx="6" fill="#1b2740"/>
+  <rect x="40" y="60" width="150" height="14" rx="5" fill="#ffffff" fill-opacity="0.85"/>
+  <rect x="40" y="82" width="96" height="8" rx="4" fill="#ffffff" fill-opacity="0.22"/>
+  <!-- stat cards -->
+  <g>
+    <rect x="40" y="104" width="124" height="56" rx="10" fill="#16213a" stroke="#f97316" stroke-opacity="0.18"/>
+    <rect x="52" y="116" width="40" height="8" rx="4" fill="#f97316" fill-opacity="0.6"/>
+    <rect x="52" y="132" width="64" height="14" rx="5" fill="#ffffff" fill-opacity="0.8"/>
+    <rect x="178" y="104" width="124" height="56" rx="10" fill="#16213a" stroke="#f97316" stroke-opacity="0.18"/>
+    <rect x="190" y="116" width="40" height="8" rx="4" fill="#f97316" fill-opacity="0.6"/>
+    <rect x="190" y="132" width="54" height="14" rx="5" fill="#ffffff" fill-opacity="0.8"/>
+    <rect x="316" y="104" width="124" height="56" rx="10" fill="#16213a" stroke="#f97316" stroke-opacity="0.18"/>
+    <rect x="328" y="116" width="40" height="8" rx="4" fill="#f97316" fill-opacity="0.6"/>
+    <rect x="328" y="132" width="60" height="14" rx="5" fill="#ffffff" fill-opacity="0.8"/>
+  </g>
+  <!-- bar chart -->
+  <rect x="40" y="176" width="400" height="90" rx="10" fill="#16213a" stroke="#f97316" stroke-opacity="0.14"/>
+  <g fill="#f97316">
+    <rect x="64"  y="226" width="20" height="26" rx="3" fill-opacity="0.5"/>
+    <rect x="104" y="210" width="20" height="42" rx="3" fill-opacity="0.65"/>
+    <rect x="144" y="196" width="20" height="56" rx="3" fill-opacity="0.85"/>
+    <rect x="184" y="218" width="20" height="34" rx="3" fill-opacity="0.55"/>
+    <rect x="224" y="204" width="20" height="48" rx="3" fill-opacity="0.7"/>
+    <rect x="264" y="190" width="20" height="62" rx="3"/>
+    <rect x="304" y="214" width="20" height="38" rx="3" fill-opacity="0.55"/>
+    <rect x="344" y="200" width="20" height="52" rx="3" fill-opacity="0.75"/>
+    <rect x="384" y="222" width="20" height="30" rx="3" fill-opacity="0.5"/>
+  </g>
+</svg>

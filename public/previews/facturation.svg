@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c1322"/><stop offset="1" stop-color="#080d18"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(440 24) rotate(135) scale(240)">
+      <stop stop-color="#22c55e" stop-opacity="0.28"/><stop offset="1" stop-color="#22c55e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="480" height="300" fill="url(#bg)"/>
+  <rect width="480" height="300" fill="url(#glow)"/>
+  <rect x="20" y="18" width="440" height="264" rx="14" fill="#0f1828" stroke="#22c55e" stroke-opacity="0.25"/>
+  <!-- invoice document -->
+  <rect x="40" y="40" width="232" height="222" rx="10" fill="#16213a" stroke="#22c55e" stroke-opacity="0.18"/>
+  <rect x="56" y="58" width="92" height="13" rx="5" fill="#ffffff" fill-opacity="0.85"/>
+  <rect x="56" y="78" width="60" height="7" rx="3" fill="#22c55e" fill-opacity="0.6"/>
+  <circle cx="246" cy="66" r="14" fill="#22c55e" fill-opacity="0.5"/>
+  <!-- invoice lines -->
+  <g>
+    <rect x="56" y="104" width="200" height="1.5" fill="#ffffff" fill-opacity="0.12"/>
+    <rect x="56" y="116" width="120" height="8" rx="4" fill="#ffffff" fill-opacity="0.4"/>
+    <rect x="206" y="116" width="50" height="8" rx="4" fill="#ffffff" fill-opacity="0.55"/>
+    <rect x="56" y="136" width="100" height="8" rx="4" fill="#ffffff" fill-opacity="0.4"/>
+    <rect x="206" y="136" width="50" height="8" rx="4" fill="#ffffff" fill-opacity="0.55"/>
+    <rect x="56" y="156" width="132" height="8" rx="4" fill="#ffffff" fill-opacity="0.4"/>
+    <rect x="206" y="156" width="50" height="8" rx="4" fill="#ffffff" fill-opacity="0.55"/>
+    <rect x="56" y="176" width="110" height="8" rx="4" fill="#ffffff" fill-opacity="0.4"/>
+    <rect x="206" y="176" width="50" height="8" rx="4" fill="#ffffff" fill-opacity="0.55"/>
+  </g>
+  <!-- total -->
+  <rect x="56" y="206" width="200" height="36" rx="8" fill="#22c55e" fill-opacity="0.15"/>
+  <rect x="68" y="219" width="60" height="10" rx="5" fill="#22c55e" fill-opacity="0.8"/>
+  <rect x="196" y="219" width="48" height="10" rx="5" fill="#ffffff" fill-opacity="0.85"/>
+  <!-- side: donut + stats -->
+  <g>
+    <circle cx="368" cy="96" r="40" fill="none" stroke="#16213a" stroke-width="12"/>
+    <circle cx="368" cy="96" r="40" fill="none" stroke="#22c55e" stroke-width="12" stroke-opacity="0.85" stroke-dasharray="180 251" stroke-linecap="round" transform="rotate(-90 368 96)"/>
+    <rect x="300" y="156" width="136" height="40" rx="8" fill="#16213a"/>
+    <rect x="312" y="168" width="40" height="7" rx="3" fill="#22c55e" fill-opacity="0.6"/>
+    <rect x="312" y="181" width="70" height="9" rx="4" fill="#ffffff" fill-opacity="0.75"/>
+    <rect x="300" y="206" width="136" height="40" rx="8" fill="#16213a"/>
+    <rect x="312" y="218" width="40" height="7" rx="3" fill="#22c55e" fill-opacity="0.6"/>
+    <rect x="312" y="231" width="58" height="9" rx="4" fill="#ffffff" fill-opacity="0.75"/>
+  </g>
+</svg>
