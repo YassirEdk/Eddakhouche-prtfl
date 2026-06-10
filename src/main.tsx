@@ -22,6 +22,24 @@ const doReveal = () => {
   }
   (window as any).__siteRevealed = true;
   window.dispatchEvent(new Event("site-revealed"));
+
+  // Welcome white flash — a quick bright burst that fades to reveal the site.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion) {
+    const flash = document.createElement("div");
+    flash.style.cssText =
+      "position:fixed;inset:0;z-index:100000;background:#ffffff;pointer-events:none;will-change:opacity;";
+    document.body.appendChild(flash);
+    const anim = flash.animate(
+      [
+        { opacity: 0.95 },
+        { opacity: 0.95, offset: 0.12 },
+        { opacity: 0 },
+      ],
+      { duration: 700, easing: "ease-out" }
+    );
+    anim.onfinish = () => flash.remove();
+  }
 };
 
 // Keep the neon "E" loader visible until the site is genuinely ready:
