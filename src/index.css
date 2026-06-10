@@ -245,3 +245,27 @@
     animation: demo-shine-sweep 0.7s ease-out;
   }
 }
+
+/* ── Low-end machines: cut the most expensive GPU work ──
+   Un-layered so these win over Tailwind utility classes without !important. */
+.low-perf .animate-float-1,
+.low-perf .animate-float-2,
+.low-perf .animate-float-3,
+.low-perf .animate-glow-pulse {
+  animation: none;
+}
+
+/* Smaller blur radius on the ambient background blobs (big blurs are costly). */
+.low-perf .bg-blob {
+  filter: blur(40px);
+}
+
+/* Backdrop blur is per-frame expensive; drop it and use an opaque-ish surface. */
+.low-perf .glass-card,
+.low-perf [class*="backdrop-blur"] {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.low-perf .glass-card {
+  background-color: hsl(var(--card) / 0.92);
+}

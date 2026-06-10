@@ -15,11 +15,16 @@ const CursorInner = () => {
   const COLOR = resolvedTheme === "light" ? "#000000" : "#ffffff";
 
   useEffect(() => {
-    let mx = 0, my = 0, cx = 0, cy = 0, raf = 0;
+    let mx = 0, my = 0, cx = 0, cy = 0, raf = 0, running = false;
+
+    const ensureRunning = () => {
+      if (!running) { running = true; raf = requestAnimationFrame(tick); }
+    };
 
     const onMove = (e: MouseEvent) => {
       mx = e.clientX; my = e.clientY;
       if (!visible) setVisible(true);
+      ensureRunning();
     };
 
     const onOver = (e: MouseEvent) => {
@@ -30,10 +35,13 @@ const CursorInner = () => {
     };
 
     const tick = () => {
-      cx += (mx - cx) * 0.12;
-      cy += (my - cy) * 0.12;
+      const dx = mx - cx, dy = my - cy;
+      cx += dx * 0.12;
+      cy += dy * 0.12;
       if (cursorRef.current)
         cursorRef.current.style.transform = `translate(${cx}px,${cy}px)`;
+      // Stop the loop once the cursor has settled; onMove restarts it.
+      if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) { running = false; return; }
       raf = requestAnimationFrame(tick);
     };
 
@@ -41,11 +49,12 @@ const CursorInner = () => {
     window.addEventListener("mouseover",  onOver);
     document.documentElement.addEventListener("mouseleave", () => setVisible(false));
     document.documentElement.addEventListener("mouseenter", () => setVisible(true));
-    raf = requestAnimationFrame(tick);
+    ensureRunning();
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseover",  onOver);
       cancelAnimationFrame(raf);
+      running = false;
     };
   }, [visible]);
 

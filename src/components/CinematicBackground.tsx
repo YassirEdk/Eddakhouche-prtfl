@@ -61,7 +61,7 @@ export const CinematicBackground = () => {
       {/* Blob 1 — top-left */}
       <div className="absolute top-[-15%] left-[-10%] w-[65%] h-[65%] animate-float-1 motion-reduce:animate-none">
         <div
-          className="w-full h-full rounded-full blur-[100px]"
+          className="bg-blob w-full h-full rounded-full blur-[100px]"
           style={{ background: theme.c1, transition: "background 1.2s ease" }}
         />
       </div>
@@ -69,7 +69,7 @@ export const CinematicBackground = () => {
       {/* Blob 2 — bottom-right */}
       <div className="absolute bottom-[-20%] right-[-10%] w-[55%] h-[55%] animate-float-2 motion-reduce:animate-none">
         <div
-          className="w-full h-full rounded-full blur-[90px]"
+          className="bg-blob w-full h-full rounded-full blur-[90px]"
           style={{ background: theme.c2, transition: "background 1.4s ease" }}
         />
       </div>
@@ -77,7 +77,7 @@ export const CinematicBackground = () => {
       {/* Blob 3 — center */}
       <div className="absolute top-[35%] left-[30%] w-[40%] h-[40%] animate-float-3 motion-reduce:animate-none">
         <div
-          className="w-full h-full rounded-full blur-[80px]"
+          className="bg-blob w-full h-full rounded-full blur-[80px]"
           style={{ background: theme.c3, transition: "background 1.6s ease" }}
         />
       </div>

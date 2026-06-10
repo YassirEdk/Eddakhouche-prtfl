@@ -2,6 +2,18 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
+// Detect low-end machines once and tag <html> so heavy effects (cube backdrop
+// blur, floating blurred background blobs) can fall back to cheaper versions.
+(() => {
+  const nav = navigator as Navigator & { deviceMemory?: number };
+  const cores = nav.hardwareConcurrency ?? 8;
+  const memory = nav.deviceMemory ?? 8;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || cores <= 4 || memory <= 4) {
+    document.documentElement.classList.add("low-perf");
+  }
+})();
+
 createRoot(document.getElementById("root")!).render(<App />);
 
 // Welcome reveal — the site emerges from a subtle dark fade (theme-aware),

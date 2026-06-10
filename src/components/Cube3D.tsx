@@ -23,12 +23,13 @@ export const Cube3D = ({ scale = 1 }: { scale?: number }) => {
   const rotation   = useRef({ x: 15, y: 0 });
   const rafRef     = useRef<number>(0);
 
-  // On touch devices, drop the per-frame backdrop blur (very expensive on
-  // mobile GPUs) and lean on a more opaque gradient instead.
+  // Drop the per-frame backdrop blur (very expensive on weak GPUs) on touch
+  // devices AND low-end machines, leaning on a more opaque gradient instead.
   const [lite, setLite] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(pointer: coarse)");
-    const update = () => setLite(mq.matches);
+    const lowPerf = document.documentElement.classList.contains("low-perf");
+    const update = () => setLite(mq.matches || lowPerf);
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
