@@ -269,3 +269,8 @@
 .low-perf .glass-card {
   background-color: hsl(var(--card) / 0.92);
 }
+
+/* Project card title takes the card's own accent colour on hover. */
+.group:hover .project-title {
+  color: var(--card-accent);
+}

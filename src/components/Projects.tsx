@@ -123,7 +123,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               Projet
             </span>
           </div>
-          <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
+          <h3 className="project-title text-base font-bold text-foreground transition-colors" style={{ ["--card-accent" as string]: project.accent }}>{project.title}</h3>
         </div>
 
         <div className="h-px mx-5" style={{ background: `linear-gradient(to right,${project.accent}30,transparent)` }} />
