@@ -32,10 +32,11 @@ export const useScrollAnimation = (threshold = 0.1) => {
           observer.disconnect();
         }
       },
-      // threshold 0 + a small negative bottom margin: triggers as soon as the
-      // element edge enters the viewport. Using a ratio threshold breaks on
-      // mobile where a section can be taller than the screen and never reaches it.
-      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
+      // threshold 0 + a positive bottom margin: reveal an element a bit BEFORE
+      // it scrolls into view, so fast scrolls don't land on blank, not-yet-
+      // revealed space. A ratio threshold is avoided because on mobile a section
+      // can be taller than the screen and never reach it.
+      { threshold: 0, rootMargin: "0px 0px 25% 0px" }
     );
 
     observer.observe(el);
