@@ -4,37 +4,28 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
 
-// Welcome flash — a white burst that grows from the center to the edges, then fades.
-// Played immediately on entry, over the loading screen.
-const playWelcomeFlash = () => {
+// Welcome reveal — the site emerges from a subtle dark fade (theme-aware),
+// understated and cinematic rather than a bright flash.
+const playWelcomeFade = () => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const wrap = document.createElement("div");
-  wrap.style.cssText =
-    "position:fixed;inset:0;z-index:100000;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden;";
+  const isLight = document.documentElement.classList.contains("light");
+  const bg = isLight ? "hsl(210,30%,97%)" : "hsl(225,55%,4%)";
 
-  const burst = document.createElement("div");
-  // A circle large enough to cover the whole viewport (incl. corners) when scaled.
-  burst.style.cssText =
-    "width:230vmax;height:230vmax;border-radius:50%;" +
-    "background:radial-gradient(circle, #ffffff 0%, #ffffff 55%, rgba(255,255,255,0) 75%);" +
-    "transform:scale(0);will-change:transform,opacity;";
+  const overlay = document.createElement("div");
+  overlay.style.cssText =
+    `position:fixed;inset:0;z-index:100000;pointer-events:none;background:${bg};will-change:opacity;`;
+  document.body.appendChild(overlay);
 
-  wrap.appendChild(burst);
-  document.body.appendChild(wrap);
-
-  const anim = burst.animate(
+  const anim = overlay.animate(
     [
-      { transform: "scale(0)",   opacity: 1, offset: 0 },
-      { transform: "scale(1)",   opacity: 1, offset: 0.6 },
-      { transform: "scale(1.1)", opacity: 0, offset: 1 },
+      { opacity: 0.9, offset: 0 },
+      { opacity: 0, offset: 1 },
     ],
-    { duration: 1500, easing: "cubic-bezier(0.33, 0, 0.2, 1)" }
+    { duration: 1100, easing: "cubic-bezier(0.4, 0, 0.2, 1)" }
   );
-  anim.onfinish = () => wrap.remove();
+  anim.onfinish = () => overlay.remove();
 };
-
-playWelcomeFlash();
 
 let revealed = false;
 
@@ -54,6 +45,8 @@ const doReveal = () => {
   }
   (window as any).__siteRevealed = true;
   window.dispatchEvent(new Event("site-revealed"));
+
+  playWelcomeFade();
 };
 
 // Keep the neon "E" loader visible until the site is genuinely ready:
