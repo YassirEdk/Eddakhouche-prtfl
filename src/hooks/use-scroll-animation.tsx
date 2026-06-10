@@ -8,6 +8,23 @@ export const useScrollAnimation = (threshold = 0.1) => {
     const el = ref.current;
     if (!el) return;
 
+    // Reveal if any part of the element is in (or near) the viewport.
+    const isInView = () => {
+      const rect = el.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    };
+
+    if (isInView()) {
+      setVisible(true);
+      return;
+    }
+
+    // Fallback for environments without IntersectionObserver.
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -15,18 +32,28 @@ export const useScrollAnimation = (threshold = 0.1) => {
           observer.disconnect();
         }
       },
-      { threshold }
+      // threshold 0 + a small negative bottom margin: triggers as soon as the
+      // element edge enters the viewport. Using a ratio threshold breaks on
+      // mobile where a section can be taller than the screen and never reaches it.
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
     );
 
-    // If element is already in the viewport (page just revealed), show it instantly
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setVisible(true);
-      return;
-    }
-
     observer.observe(el);
-    return () => observer.disconnect();
+
+    // Safety net: if layout shifts (mobile address bar, late images) leave the
+    // element on screen without an observer callback, re-check on resize.
+    const onResize = () => {
+      if (isInView()) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    };
+    window.addEventListener("resize", onResize, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", onResize);
+    };
   }, [threshold]);
 
   return { ref, visible };

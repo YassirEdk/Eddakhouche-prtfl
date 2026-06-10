@@ -18,7 +18,7 @@ const personalProjects = [
     description: "Plateforme de location de voitures où les clients peuvent effectuer leurs réservations en ligne, tout en offrant une gestion claire et organisée pour l'agence (véhicules, réservations et suivi des clients).",
     technologies: ["React", "Supabase", "Sharp", "JavaScript", "Vite"],
     link: "https://yassir-cars.vercel.app/",
-    image: "/yassir-cars.png",
+    image: "/yassir-cars.webp",
     icon: "🚙", accent: "#06b6d4", glow: "rgba(6,182,212,0.25)", border: "hover:border-cyan-500/40", featured: true,
   },
 ];
