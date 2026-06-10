@@ -54,15 +54,15 @@ export const Contact = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="relative">
             <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
-            <input name="name" value={form.name} onChange={handleChange} placeholder="Votre nom" required className={inputClass} />
+            <input data-cursor="text" name="name" value={form.name} onChange={handleChange} placeholder="Votre nom" required className={inputClass} />
           </div>
           <div className="relative">
             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground/60" />
-            <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Votre email" required className={inputClass} />
+            <input data-cursor="text" name="email" type="email" value={form.email} onChange={handleChange} placeholder="Votre email" required className={inputClass} />
           </div>
           <div className="relative">
             <MessageSquare className="absolute left-3 top-4 w-4 h-4 text-muted-foreground/60" />
-            <textarea name="message" value={form.message} onChange={handleChange} placeholder="Votre message..." required rows={4} className={`${inputClass} resize-none`} />
+            <textarea data-cursor="text" name="message" value={form.message} onChange={handleChange} placeholder="Votre message..." required rows={4} className={`${inputClass} resize-none`} />
           </div>
 
           <Button type="submit" disabled={status === "sending"}
