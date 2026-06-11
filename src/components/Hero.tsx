@@ -170,7 +170,7 @@ export const Hero = () => {
 
               {/* Primary CTA */}
               <Button asChild data-cursor="download" className="gap-2 w-full max-w-xs bg-primary text-white hover:bg-primary/90 shadow-[0_0_25px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)] transition-all">
-                <a href="https://drive.usercontent.google.com/u/0/uc?id=1d2yXbGIH0BqWnObPQsqaTpsjhsvRJQLe&export=download" download>
+                <a href="https://drive.usercontent.google.com/u/0/uc?id=1CBlx5vwaPFR4WXg2fv2Vn1u8xyhPH9Us&export=download" download>
                   <Download className="w-4 h-4" />Télécharger mon CV
                 </a>
               </Button>
